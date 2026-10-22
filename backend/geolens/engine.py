@@ -3,6 +3,8 @@ import math
 import re
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from astral import Observer
+from astral.sun import elevation
 
 IST = ZoneInfo("Asia/Kolkata")
 RULE_VERSION = "2026-10-22.1"
@@ -111,6 +113,9 @@ def evaluate(venues, hours, activity, constraints):
             eligibility = "eligible"
             tags, features = venue["tags"], venue.get("features", {})
             fit = activity_fit(venue, activity)
+            if activity=='outdoor_photography':
+                solar=elevation(Observer(venue['lat'],venue['lon']),start)
+                fit=clip(abs(solar+1)/12) if constraints.get('photography_goal')=='sunset' else clip((abs(solar-10)-5)/30)
             if tags.get("access") in {"private", "no", "customers", "members"} or fit is None:
                 eligibility = "excluded"
                 warnings.append("restricted_or_incompatible_venue")
@@ -129,6 +134,8 @@ def evaluate(venues, hours, activity, constraints):
             if any(h.get("weather_code") in (95, 96, 99) for h in window):
                 eligibility = "avoid" if eligibility != "excluded" else eligibility
                 warnings.append("thunderstorm")
+            if constraints.get('child_present') and features.get('water_distance_m') is not None and features['water_distance_m']<100:
+                warnings.append('near_water_supervise_children')
             aq = [h["us_aqi"] for h in window if h.get("us_aqi") is not None]
             if len(aq) != len(window):
                 limits.append("regional_air_quality_unavailable")

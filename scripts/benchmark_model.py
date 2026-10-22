@@ -6,9 +6,10 @@ import time
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'backend'))
 from geolens.model import model
+from geolens.config import settings
 
 async def main():
-    report={'model':'Qwen/Qwen3.5-2B','quantization':'Q4_K_M','threads':2,'context':4096,'thinking':False,'host':'local AMD Ryzen AI 9 HX 370; not production server','cases':[]}
+    report={'model':settings.model_id,'quantization':'Q4_K_M','threads':2,'context':4096,'thinking':False,'host':'local AMD Ryzen AI 9 HX 370; not production server','cases':[]}
     for question in ['Where should I run tomorrow morning near Powai, Mumbai?','कल सुबह पवई मुंबई के पास दौड़ने के लिए कौन सी जगह बेहतर रहेगी?','I have asthma. Find outdoor tennis tomorrow evening within 5 km of Bandra, Mumbai.']:
         try:
             start=time.perf_counter()

@@ -11,3 +11,11 @@ models/
 New Text Document.txt
 *.mp4
 *.webm
+*.tsbuildinfo
+
+.release-venv/
+output/video-frames/
+output/video-final/
+
+.env*
+!.env.example

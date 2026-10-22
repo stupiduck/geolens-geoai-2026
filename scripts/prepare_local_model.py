@@ -53,7 +53,10 @@ def main():
     download(asset["browser_download_url"], binary)
     runtime = directory / "runtime"
     runtime.mkdir(exist_ok=True)
-    if binary.suffix == ".zip":
+    already_extracted=(runtime / ('llama-server.exe' if platform.system()=='Windows' else 'llama-server')).exists()
+    if already_extracted:
+        pass
+    elif binary.suffix == ".zip":
         with zipfile.ZipFile(binary) as archive:
             archive.extractall(runtime)
     else:

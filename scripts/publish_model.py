@@ -7,9 +7,11 @@ from pathlib import Path
 from huggingface_hub import HfApi,snapshot_download
 
 p=argparse.ArgumentParser()
-p.add_argument('--repo',required=True,help='User-selected public account/name')
+p.add_argument('--repo',help='User-selected public account/name; required only with --upload')
 p.add_argument('--upload',action='store_true')
 args=p.parse_args()
+if args.upload and not args.repo:
+    p.error('--upload requires the chosen public --repo account/name')
 target=Path('models/hf-staging')
 snapshot_download('Qwen/Qwen3.5-2B',revision='15852e8c16360a2fea060d615a32b45270f8a8fc',local_dir=target,ignore_patterns=['*.gguf'])
 shutil.copyfile('hf-release/README.md',target/'README.md')

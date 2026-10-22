@@ -31,6 +31,8 @@ class Location(BaseModel):
     text: str | None = Field(None,max_length=300)
     latitude: float | None = Field(None,ge=-90,le=90)
     longitude: float | None = Field(None,ge=-180,le=180)
+    id: str | None = Field(None,max_length=120)
+    name: str | None = Field(None,max_length=500)
 
     @model_validator(mode="after")
     def paired(self):
@@ -103,10 +105,11 @@ async def run_query(query, identifier, emit):
     activity = query.activity or intent["activity"]
     result["normalized_intent"] = intent
     result["timing_ms"] = {"intent":it}
+    result['input']={'question':query.question,'language':language,'selected_location':query.location.model_dump(exclude_none=True) if query.location else None}
+    if intent.get("commute"):
+        return {**result,"status":"needs_clarification","answer":"कृपया यात्रा का शुरुआती स्थान और गंतव्य बताएं। इस संस्करण में पूरे यात्रा मार्ग का विश्लेषण उपलब्ध नहीं है।" if language=='hi' else "Please supply your starting area and destination for commute planning. Route-level commute analysis is not yet available in this build.","clarification":{"fields":["origin","destination"],"reason":"route_analysis_unavailable"}}
     if activity not in ACTIVITIES:
         return {**result,"status":"out_of_scope","answer":"Please choose an outdoor activity: running, cycling, golf, cricket, football, tennis, hiking, picnic, outdoor gathering or photography."}
-    if intent.get("commute"):
-        return {**result,"status":"needs_clarification","answer":"Please supply your starting area and destination for commute planning. Route-level commute analysis is not yet available in this build.","clarification":{"fields":["origin","destination"]}}
     location = query.location or Location(text=intent.get("location"))
     if location.latitude is None and not location.text:
         return {**result,"status":"needs_clarification","answer":"कृपया अपना इलाका या शहर बताएं।" if language=="hi" else "Which area or city should I search near?","clarification":{"fields":["location"]}}
@@ -122,10 +125,13 @@ async def run_query(query, identifier, emit):
         return {**result,"status":"needs_clarification","answer":"Please use a radius between 0.5–50 km and duration between 15–360 minutes."}
     constraints = {k:bool(intent.get(k)) for k in ("pollution_sensitive","child_present","older_adult","pregnancy","avoid_steep_terrain")}
     if query.profile:
-        constraints.update(query.profile.model_dump(exclude_unset=True))
+        for key,value in query.profile.model_dump(exclude_unset=True).items():
+            constraints[key]=bool(constraints.get(key)) or value
     if query.constraints:
         constraints.update(query.constraints.model_dump(exclude_unset=True))
     constraints.update({"radius_km":radius,"duration_minutes":duration,"start":start.isoformat(),"end":end.isoformat()})
+    if activity=='outdoor_photography':
+        constraints['photography_goal']='sunset' if re.search('sunset|सूर्यास्त',query.question,re.I) else 'general'
     result["assumptions"] = [f"Search radius: {radius:g} km straight-line; activity duration: {duration} minutes.",f"Evaluated local start times: {start.isoformat()} to {end.isoformat()}."]
     result["normalized_intent"].update({"activity":activity,"constraints":constraints,"language":language})
     await emit("location", "Resolving the search area")
@@ -134,7 +140,8 @@ async def run_query(query, identifier, emit):
         # Coordinates are explicit user input; never silently substitute a city.
         if not (6<=lat<=38 and 68<=lon<=98):
             return {**result,"status":"out_of_scope","answer":"This prototype supports Indian search areas."}
-        name = f"{lat:.4f}, {lon:.4f}"
+        name = location.name or f"{lat:.4f}, {lon:.4f}"
+        result['evidence'].append({'id':'location','kind':'user_selected_coordinate' if location.id else 'user_provided_coordinate','location_id':location.id,'latitude':lat,'longitude':lon,'retrieved_at':timestamp()})
     else:
         places,meta = await sources.geocode(location.text)
         result["evidence"].append({"id":"location","kind":"mapped_feature",**meta})
@@ -142,7 +149,7 @@ async def run_query(query, identifier, emit):
             return {**result,"status":"needs_clarification","answer":"I could not resolve that Indian location. Add the city/state or choose coordinates."}
         # Same named area in different states/cities needs a deliberate choice.
         if len(places)>1 and places[0].get("address",{}).get("state")!=places[1].get("address",{}).get("state"):
-            return {**result,"status":"needs_clarification","answer":"Which location did you mean?","clarification":{"fields":["location"],"choices":[p["display_name"] for p in places]}}
+            return {**result,"status":"needs_clarification","answer":"आप किस स्थान की बात कर रहे हैं?" if language=='hi' else "Which location did you mean?","clarification":{"fields":["location"],"choices":[{'id':f"{p.get('osm_type','place')}/{p.get('osm_id',p.get('place_id'))}",'name':p['display_name'],'latitude':float(p['lat']),'longitude':float(p['lon'])} for p in places]}}
         lat,lon,name = float(places[0]["lat"]),float(places[0]["lon"]),places[0]["display_name"]
     result["location"] = {"latitude":lat,"longitude":lon,"name":name,"radius_km":radius}
     await emit("venues", "Finding actual mapped activity locations")
@@ -185,10 +192,21 @@ async def run_query(query, identifier, emit):
         time_label = datetime.fromisoformat(preferred["time"]).strftime("%d %b, %H:%M")
         near_tie = len(shortlist)>1 and preferred["score_low"]<=max(o["score_high"] for o in shortlist if o["id"]!=preferred["id"])
         result.update({"status":"ok","recommendations":[preferred],"alternatives":[o for o in shortlist if o["id"]!=preferred["id"]],"reasoning":reasoning,"ranking_stability":"conditional_near_tie" if near_tie else "separated_by_score_bounds",
-            "answer":f"{best['name']} — {time_label} IST. उपयुक्तता {preferred['score_low']:.0f}–{preferred['score_high']:.0f}/100। प्रवेश और समय की पुष्टि करें।" if language=="hi" else f"{best['name']} at {time_label} IST: heuristic suitability {preferred['score_low']:.0f}–{preferred['score_high']:.0f}/100. Confirm access and opening hours."})
+            "answer":f"{best['name']} | {time_label} IST. उपयुक्तता {preferred['score_low']:.0f}–{preferred['score_high']:.0f}/100। प्रवेश और समय की पुष्टि करें।" if language=="hi" else f"{best['name']} at {time_label} IST: heuristic suitability {preferred['score_low']:.0f}–{preferred['score_high']:.0f}/100. Confirm access and opening hours."})
         if near_tie:
-            result["answer"] += " Close alternatives remain plausible because score ranges overlap."
+            result["answer"] += " स्कोर की सीमाएं मिलती हैं, इसलिए अन्य विकल्प भी उचित हो सकते हैं।" if language=='hi' else " Close alternatives remain plausible because score ranges overlap."
+        names={v['id']:v['name'] for v in venues}
+        options_by_id={o['id']:o for o in shortlist}
+        phrases={"higher_score":("has a higher heuristic suitability score than","की गणना की गई उपयुक्तता इससे बेहतर है:"),"cooler_than":("has a lower start-hour temperature than","के शुरू के घंटे का तापमान इससे कम है:"),"less_rain_than":("has a lower start-hour rain probability than","के शुरू के घंटे में बारिश की संभावना इससे कम है:"),"cleaner_regional_air":("has lower modeled regional US AQI than","का क्षेत्रीय मॉडल वाला US AQI इससे कम है:"),"regional_aq_shared":("shares the same modeled regional US AQI with","और इस विकल्प का क्षेत्रीय मॉडल वाला US AQI समान है:"),'lower_thermal_penalty':('has less modeled thermal discomfort than','में तापमान की असुविधा इससे कम है:'),'lower_road_proxy':('has a lower heuristic road/industry exposure proxy than','का सड़क/उद्योग निकटता संकेत इससे कम है:'),'shorter_trip':('has a lower travel-distance penalty than','की दूरी की असुविधा इससे कम है:')}
+        result['explanations']=[]
+        for claim in reasoning['claims']:
+            a,b=options_by_id[claim['subject']],options_by_id[claim['object']]
+            text=f"{names[a['venue_id']]} ({datetime.fromisoformat(a['time']).strftime('%H:%M')}) {phrases[claim['predicate']][1 if language=='hi' else 0]} {names[b['venue_id']]} ({datetime.fromisoformat(b['time']).strftime('%H:%M')})."
+            references={'shorter_trip':['venues','location'],'lower_road_proxy':['venues','geography','weather'],'lower_thermal_penalty':['weather'],'cooler_than':['weather'],'less_rain_than':['weather'],'cleaner_regional_air':['air_quality'],'regional_aq_shared':['air_quality'],'higher_score':['venues','weather','air_quality','geography']}
+            result['explanations'].append({'text':text,'predicate':claim['predicate'],'evidence_ids':references[claim['predicate']],'option_ids':[a['id'],b['id']]})
         result["precautions"] = ["Carry water and suitable footwear; check conditions again before leaving.","Postpone outdoor activity if thunder is heard; seek a substantial enclosed shelter."]
+        if any(code.startswith('pollution_') for code in preferred['warning_codes']):
+            result['precautions'].append('Modeled regional air quality is elevated: reduce intensity/duration, take breaks and consider postponing strenuous activity. This is a coarse forecast, not a local sensor.')
         if constraints.get("pollution_sensitive"):
             result["precautions"].append("Follow your existing clinician/asthma action plan; reduce intensity when air quality is poor. This regional forecast cannot establish personal safety.")
     result["timing_ms"]["total"] = round((time.perf_counter()-started)*1000)
@@ -321,7 +339,7 @@ async def scenario(identifier: str,body: ScenarioRequest):
     constraints={**original["normalized_intent"]["constraints"],"pollution_sensitive":body.pollution_sensitive}
     matrix=evaluate(original["venues"],[],original["normalized_intent"]["activity"],constraints)
     ordered=rank(matrix)
-    return {**original,"matrix":matrix,"recommendations":ordered[:1],"alternatives":ordered[1:3],"scenario":{"kind":"deterministic_rescore","changed":{"pollution_sensitive":body.pollution_sensitive},"source_snapshot":identifier},"answer":"Sensitivity scenario recomputed from the same retrieved evidence. Scores and avoidance policies reflect the changed constraint; no new measurements were invented."}
+    return {**original,"status":"ok" if ordered else "no_suitable_option","matrix":matrix,"recommendations":ordered[:1],"alternatives":ordered[1:3],"avoid_windows":[o for o in matrix if o['eligibility']=='avoid'][:24],"normalized_intent":{**original['normalized_intent'],'pollution_sensitive':body.pollution_sensitive,'constraints':constraints},"explanations":[],"reasoning":{"mode":"deterministic_counterfactual","initial_interpretation_model":settings.model_id},"scenario":{"kind":"deterministic_rescore","changed":{"pollution_sensitive":body.pollution_sensitive},"source_snapshot":identifier,"computed_at":timestamp()},"answer":"Sensitivity scenario recomputed from the same retrieved evidence. Scores and avoidance policies reflect the changed constraint; no new measurements were invented."}
 
 
 @app.post('/v1/analyses/{identifier}/compare')

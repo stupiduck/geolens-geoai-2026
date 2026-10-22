@@ -2,6 +2,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from geolens.engine import evaluate, compare, upwind_alignment, resolve_time, ACTIVITIES
+import pytest
 
 
 def venue():
@@ -30,6 +31,16 @@ def test_all_ten_profiles_exist():
     assert len(ACTIVITIES) == 10
 
 
+@pytest.mark.parametrize('activity',list(ACTIVITIES))
+def test_each_activity_has_a_computable_profile(activity):
+    v=venue()
+    v['tags']={'leisure':'park','sport':{'tennis':'tennis','football':'soccer','cricket':'cricket','golf':'golf'}.get(activity,'')}
+    h=hours()[:1]
+    result=evaluate([v],h,activity,{'duration_minutes':60})
+    assert len(result)==1
+    assert 0<=result[0]['score_low']<=result[0]['score_high']<=100
+
+
 def test_long_window_cannot_hide_later_thunderstorm():
     result = evaluate([venue()], hours(), "tennis", {"duration_minutes": 120})
     assert result[0]["eligibility"] == "avoid"
@@ -55,6 +66,21 @@ def test_sensitive_profile_tightens_pollution_advice():
     sensitive = evaluate([venue()], h, "tennis", {"pollution_sensitive": True})[0]
     assert general["eligibility"] != "avoid"
     assert sensitive["eligibility"] == "avoid"
+
+
+@pytest.mark.parametrize('profile',[{}, {'pollution_sensitive':True}, {'child_present':True}, {'older_adult':True}, {'pregnancy':True}])
+@pytest.mark.parametrize('aq',[100,150,151,200,201])
+def test_identical_environment_and_profile_have_consistent_aq_policy(profile,aq):
+    from copy import deepcopy
+    h=hours()[:1];h[0]['us_aqi']=aq
+    expected='avoid' if aq >= (151 if profile else 201) else 'eligible'
+    for activity in ACTIVITIES:
+        v=venue();v['tags']={'access':'yes','leisure':'park','sport':{'tennis':'tennis','football':'soccer','cricket':'cricket','golf':'golf'}.get(activity,'')}
+        a=evaluate([v],deepcopy(h),activity,{**profile,'duration_minutes':60})[0]
+        v['id']='another';v['name']='Same conditions, different venue'
+        b=evaluate([v],deepcopy(h),activity,{**profile,'duration_minutes':60})[0]
+        assert a['eligibility']==b['eligibility']==expected
+        assert a['warning_codes']==b['warning_codes']
 
 
 def test_counterfactual_delta_matches_contributions():

@@ -35,3 +35,7 @@ After publication, use the actual published repository ID and pinned release rev
 ## Development disclosure
 
 OpenAI Codex assisted implementation. No hosted proprietary language model is called by the running application. The sole runtime language model is self-hosted. Public data sources and their separate terms are documented in the code repository.
+
+## Local reproducibility check
+
+Pinned original checkpoint contains 2,274,069,824 tensor elements (verified from the safetensors header). Transformers 5.20.2 with CPU Torch 2.14.1 successfully loaded and generated locally using `AutoModelForImageTextToText.from_pretrained`, `trust_remote_code=False` and local files only. Its inference class loaded 2,213,241,664 parameters; auxiliary upstream tensors account for the difference. This does not establish successful public Hub loading, which must be checked after publication. Use the separate release environment in `scripts/requirements-release.lock.txt`; the production API uses the lighter quantized llama.cpp runtime.

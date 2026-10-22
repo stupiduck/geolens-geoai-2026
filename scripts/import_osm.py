@@ -95,7 +95,13 @@ def main():
         db.execute("INSERT OR REPLACE INTO metadata VALUES ('import_complete','true')")
         db.commit()
         print(json.dumps({"output":str(output),"features":handler.count,"metadata":metadata}))
-        node_cache.unlink(missing_ok=True)
+        del handler
+        import gc
+        gc.collect()
+        try:
+            node_cache.unlink(missing_ok=True)
+        except PermissionError:
+            print('Import complete; Windows retained the node-cache handle. The ignored cache can be removed after this process exits.')
 
 
 if __name__=="__main__":

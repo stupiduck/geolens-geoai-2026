@@ -50,6 +50,17 @@ def geometry(element):
     return Point(center["lon"], center["lat"]) if center else None
 
 
+def deduplicate_elements(elements):
+    unique={}
+    for e in elements:
+        key=(e['type'],e['id'])
+        previous=unique.get(key)
+        is_area=e.get('geojson',{}).get('type') in {'Polygon','MultiPolygon'}
+        if previous is None or is_area:
+            unique[key]=e
+    return list(unique.values())
+
+
 class Sources:
     def __init__(self):
         Path(settings.database).parent.mkdir(parents=True, exist_ok=True)
@@ -75,6 +86,9 @@ class Sources:
             data = response.json()
             saved = time.time()
             self.db.execute("INSERT OR REPLACE INTO cache VALUES (?,?,?)", (key,saved,json.dumps(data)))
+            self.db.execute('DELETE FROM cache WHERE saved<?',(saved-604800,))
+            if self.db.execute('SELECT COUNT(*) FROM cache').fetchone()[0]>600:
+                self.db.execute('DELETE FROM cache WHERE key IN (SELECT key FROM cache ORDER BY saved LIMIT 50)')
             self.db.commit()
             return data, {"retrieved_at": datetime.fromtimestamp(saved, timezone.utc).isoformat(), "cache": False, "url": url, "sha256": hashlib.sha256(response.content).hexdigest()}
 
@@ -91,6 +105,8 @@ class Sources:
         if time.monotonic()<self.overpass_retry_at:
             raise RuntimeError("Overpass circuit open after recent source outage")
         async with self.overpass_lock:
+            if time.monotonic()<self.overpass_retry_at:
+                raise RuntimeError("Overpass circuit opened while waiting for source slot")
             for url in settings.overpass_urls.split(","):
                 try:
                     payload, meta = await self.fetch(url.strip(), {"data": query}, 21600, timeout=13)
@@ -103,17 +119,43 @@ class Sources:
             self.overpass_retry_at=time.monotonic()+300
             raise RuntimeError("Overpass unavailable: " + ",".join(errors))
 
-    def extract(self, lat, lon, radius):
-        path = Path(settings.osm_extract_database)
+    def extract(self, lat, lon, radius, activity=None):
+        errors=[]
+        for filename in [settings.osm_extract_database,*settings.osm_extract_extra_databases.split(';')]:
+            if not filename.strip():
+                continue
+            try:
+                return self.extract_database(filename.strip(),lat,lon,radius,activity)
+            except (RuntimeError,sqlite3.Error) as exc:
+                errors.append(str(exc))
+        raise RuntimeError('No completed extract covers this query: '+'; '.join(errors))
+
+    def extract_database(self, filename, lat, lon, radius, activity=None):
+        path = Path(filename)
         if not path.exists():
             raise RuntimeError("No imported OSM extract available; run scripts/import_osm.py")
         dx, dy = radius / (111.32*math.cos(math.radians(lat))), radius/110.57
         with sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True) as db:
             metadata = dict(db.execute("SELECT key,value FROM metadata"))
+            if metadata.get('import_complete')!='true':
+                raise RuntimeError('OSM extract import has not been finalized')
             bounds = json.loads(metadata["bounds"])
             if not (bounds[0] <= lon-dx and bounds[1] <= lat-dy and bounds[2] >= lon+dx and bounds[3] >= lat+dy):
                 raise RuntimeError("Requested area exceeds imported extract coverage")
-            rows = db.execute("SELECT data FROM features JOIN bounds_index USING(id) WHERE minx<=? AND maxx>=? AND miny<=? AND maxy>=? LIMIT 20001", (lon+dx,lon-dx,lat+dy,lat-dy)).fetchall()
+            # Filter before the budget so dense-city roads cannot hide actual venues.
+            tag=lambda key:f"json_extract(data,'$.tags.{key}')"
+            condition='1'
+            if activity in SPORTS:
+                condition=f"{tag('sport')} IS NOT NULL OR {tag('leisure')}='golf_course'"
+            elif activity=='cycling':
+                condition=f"{tag('highway')}='cycleway' OR {tag('route')}='bicycle' OR {tag('bicycle')}='designated'"
+            elif activity=='hiking':
+                condition=f"{tag('highway')} IN ('path','footway','track') OR {tag('route')}='hiking'"
+            elif activity=='outdoor_photography':
+                condition=f"{tag('tourism')}='viewpoint' OR {tag('leisure')} IN ('park','garden')"
+            elif activity:
+                condition=f"{tag('leisure')} IN ('park','garden','recreation_ground','track') OR {tag('tourism')}='picnic_site'"
+            rows = db.execute("SELECT data FROM features JOIN bounds_index USING(id) WHERE minx<=? AND maxx>=? AND miny<=? AND maxy>=? AND ("+condition+") LIMIT 20001", (lon+dx,lon-dx,lat+dy,lat-dy)).fetchall()
             if len(rows) > 20000:
                 raise RuntimeError("Extract query exceeds feature budget; reduce radius")
             return [json.loads(r[0]) for r in rows], {"url": metadata["source_url"], "retrieved_at": metadata["downloaded_at"], "osm_base": metadata.get("osm_timestamp"), "licence": "ODbL", "attribution": "© OpenStreetMap contributors / Geofabrik", "mode": "osm_extract", "extract_age_warning": "Snapshot geography; weather is freshly retrieved", "cache": False}
@@ -122,11 +164,11 @@ class Sources:
         area = f"(around:{int(radius*1000)},{lat:.6f},{lon:.6f})"
         query = "[out:json][timeout:10];(" + "".join("nwr"+area+s+";" for s in selectors(activity)) + ");out tags center 80;"
         try:
-            elements, meta = await self.overpass(query)
+            elements, meta = await asyncio.to_thread(self.extract, lat, lon, radius, activity)
         except RuntimeError:
-            elements, meta = await asyncio.to_thread(self.extract, lat, lon, radius)
+            elements, meta = await self.overpass(query)
         candidates, seen = [], set()
-        for e in elements:
+        for e in sorted(deduplicate_elements(elements), key=lambda item: 0 if item.get("geojson",{}).get("type") in {"Polygon","MultiPolygon"} else 1):
             tags = e.get("tags", {})
             if not candidate_matches(tags, activity):
                 continue
@@ -139,8 +181,11 @@ class Sources:
             if distance > radius or key in seen:
                 continue
             seen.add(key)
+            normalized_name=''.join(c for c in tags.get('name','').casefold() if c.isalnum()).rstrip('s')
+            if normalized_name and any(v.get('_name_key')==normalized_name and distance_km(center.y,center.x,v['lat'],v['lon'])<.15 for v in candidates):
+                continue
             candidates.append({"id": f"{e['type']}/{e['id']}", "name": tags.get("name") or tags.get("name:en") or f"Mapped {activity.replace('_',' ')} location", "lat": center.y, "lon": center.x,
-                "distance_km": round(distance,3), "tags": tags, "features": {}, "geometry": e.get("geojson")})
+                "distance_km": round(distance,3), "tags": tags, "features": {}, "geometry": e.get("geojson"),'_name_key':normalized_name})
         candidates.sort(key=lambda v: (v["tags"].get("access") in {"private","customers","members"}, v["distance_km"]))
         return candidates[:8], meta
 
@@ -151,14 +196,18 @@ class Sources:
         area = f"(around:{int((radius+1)*1000)},{lat:.6f},{lon:.6f})"
         query = "[out:json][timeout:8];("+"".join("way"+area+s+";" for s in ['[highway~"^(motorway|trunk|primary|secondary)$"]','[landuse=industrial]','[natural=water]','[natural=wood]','[landuse=forest]','[leisure=park]'])+");out geom 1500;"
         try:
-            elements, meta = await self.overpass(query)
-            if len(elements) >= 1500:
-                return {"status": "unavailable", "reason": "Feature query truncated"}
+            batches=await asyncio.gather(*(asyncio.to_thread(self.extract,v['lat'],v['lon'],1.2) for v in venues))
+            elements=deduplicate_elements([e for batch,_ in batches for e in batch])
+            meta=batches[0][1]
+            if len(elements)>12000:
+                return {'status':'unavailable','reason':'Local feature budget exceeded'}
         except RuntimeError:
             try:
-                elements, meta = await asyncio.to_thread(self.extract,lat,lon,radius+1)
+                elements, meta = await self.overpass(query)
+                if len(elements)>=1500:
+                    return {'status':'unavailable','reason':'Feature query truncated'}
             except RuntimeError as exc:
-                return {"status": "unavailable", "reason": str(exc)}
+                return {'status':'unavailable','reason':str(exc)}
         zone = int((lon+180)/6)+1
         project = Transformer.from_crs(4326, 32600+zone if lat>=0 else 32700+zone, always_xy=True).transform
         groups = {k: [] for k in ("roads","industry","water","green")}
