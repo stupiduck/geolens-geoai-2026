@@ -1,0 +1,90 @@
+{
+  "geocoding": {
+    "ok": true,
+    "count": 1,
+    "metadata": {
+      "retrieved_at": "2026-10-22T15:23:32.298695+00:00",
+      "cache": false,
+      "url": "https://nominatim.openstreetmap.org/search",
+      "sha256": "15ba198e87198933b4e611e4fad6809f19642dc026cf141c561dd8629f815ce4"
+    },
+    "sample": [
+      {
+        "place_id": 249482351,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "node",
+        "osm_id": 4759418251,
+        "lat": "19.1187195",
+        "lon": "72.9073476",
+        "category": "place",
+        "type": "suburb",
+        "place_rank": 19,
+        "importance": 0.38850590600538054,
+        "addresstype": "suburb",
+        "name": "Powai",
+        "display_name": "Powai, S Ward, Mumbai Zone 6, Mumbai, Mumbai Suburban District, Maharashtra, 400076, India",
+        "address": {
+          "suburb": "Powai",
+          "city_district": "Mumbai Zone 6",
+          "city": "Mumbai",
+          "state_district": "Mumbai Suburban District",
+          "state": "Maharashtra",
+          "ISO3166-2-lvl4": "IN-MH",
+          "postcode": "400076",
+          "country": "India",
+          "country_code": "in"
+        },
+        "boundingbox": [
+          "19.0987195",
+          "19.1387195",
+          "72.8873476",
+          "72.9273476"
+        ]
+      }
+    ]
+  },
+  "venues": {
+    "ok": false,
+    "error": "No imported OSM extract available; run scripts/import_osm.py"
+  },
+  "forecasts": {
+    "ok": true,
+    "metadata": {
+      "weather": {
+        "retrieved_at": "2026-10-22T15:24:16.610929+00:00",
+        "cache": false,
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sha256": "cc6cfd461adcd9088cee24d3a5769a448c4b1f0b6bff5bbcaa005ecab8453915",
+        "kind": "forecast",
+        "licence": "CC BY 4.0",
+        "attribution": "Open-Meteo / weather model providers"
+      },
+      "air_quality": {
+        "retrieved_at": "2026-10-22T15:24:16.675159+00:00",
+        "cache": false,
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+        "sha256": "e46c838f1fea620130aa9c2eae58fde8a173db5e63f6ec5686278ff4a1d723e6",
+        "kind": "modeled_air_quality",
+        "resolution_km": 45,
+        "attribution": "Open-Meteo / Copernicus CAMS"
+      }
+    },
+    "sample": [
+      {
+        "time": "2026-10-22T00:00:00+05:30",
+        "temperature": 29.5,
+        "apparent_temperature": 33.3,
+        "rain_probability": 0,
+        "rain_mm": 0.0,
+        "wind_kmh": 6.4,
+        "wind_direction": 328,
+        "gust_kmh": 13.0,
+        "weather_code": 2,
+        "is_day": 0,
+        "cloud_cover": 57,
+        "us_aqi": 211,
+        "pm2_5": 62.2
+      }
+    ]
+  }
+}

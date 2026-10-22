@@ -60,6 +60,7 @@ class Sources:
         self.geocode_lock = asyncio.Lock()
         self.last_geocode = 0.
         self.overpass_lock = asyncio.Lock()
+        self.overpass_retry_at = 0.
 
     async def fetch(self, url, params=None, ttl=900, timeout=12):
         key = hashlib.sha256(json.dumps([url,params], sort_keys=True).encode()).hexdigest()
@@ -87,6 +88,8 @@ class Sources:
 
     async def overpass(self, query):
         errors = []
+        if time.monotonic()<self.overpass_retry_at:
+            raise RuntimeError("Overpass circuit open after recent source outage")
         async with self.overpass_lock:
             for url in settings.overpass_urls.split(","):
                 try:
@@ -97,6 +100,7 @@ class Sources:
                     return payload["elements"], meta
                 except (httpx.HTTPError, ValueError, KeyError) as exc:
                     errors.append(type(exc).__name__)
+            self.overpass_retry_at=time.monotonic()+300
             raise RuntimeError("Overpass unavailable: " + ",".join(errors))
 
     def extract(self, lat, lon, radius):
@@ -173,12 +177,53 @@ class Sources:
         for v in venues:
             p = transform(project,Point(v["lon"],v["lat"]))
             b = p.buffer(300)
+            def bearing(group):
+                if unions[group] is None:
+                    return None
+                from shapely.ops import nearest_points
+                q=nearest_points(p,unions[group])[1]
+                return math.degrees(math.atan2(q.x-p.x,q.y-p.y))%360
             v["features"] = {"road_distance_m": round(p.distance(unions["roads"]),1) if unions["roads"] is not None else 99999,
                 "industry_distance_m": round(p.distance(unions["industry"]),1) if unions["industry"] is not None else 99999,
                 "water_distance_m": round(p.distance(unions["water"]),1) if unions["water"] is not None else None,
                 "green_fraction": round(b.intersection(unions["green"]).area/b.area,3) if unions["green"] is not None else 0,
+                "road_bearing_deg":bearing("roads"),"industry_bearing_deg":bearing("industry"),
                 "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"}
         return {**meta,"status":"available","geojson":{"type":"FeatureCollection","features":geojson}}
+
+    async def terrain(self,venues):
+        """Grade on an actual mapped segment, never a fabricated route or whole-trip claim."""
+        points=[]
+        ranges=[]
+        for v in venues[:2]:
+            if not v.get("geometry"):
+                continue
+            g=shape(v["geometry"])
+            if g.geom_type!="LineString":
+                continue
+            project=Transformer.from_crs(4326,32600+int((v["lon"]+180)/6)+1,always_xy=True)
+            inverse=Transformer.from_crs(project.target_crs,4326,always_xy=True)
+            line=transform(project.transform,g)
+            if line.length<180:
+                continue
+            distances=[min(i*120,line.length) for i in range(min(40,int(line.length/120)+1))]
+            coords=[inverse.transform(*line.interpolate(d).coords[0]) for d in distances]
+            ranges.append((v,len(points),len(coords),distances))
+            points.extend(coords)
+        if not points:
+            return {"status":"unavailable","reason":"No sufficiently long mapped route segment geometry"}
+        try:
+            data,meta=await self.fetch("https://api.opentopodata.org/v1/srtm30m",{"locations":"|".join(f"{lat},{lon}" for lon,lat in points)},2592000,timeout=6)
+            for v,offset,count,distances in ranges:
+                heights=[r.get("elevation") for r in data["results"][offset:offset+count]]
+                if len(heights)!=count or any(h is None for h in heights):
+                    continue
+                grades=[abs(heights[i]-heights[i-1])/(distances[i]-distances[i-1])*100 for i in range(1,count)]
+                v["features"]["max_grade_percent"]=round(max(grades),1)
+                v["terrain"]={"distance_m":distances,"elevation_m":heights,"dataset":"SRTM30m","scope":"Mapped segment only; not a verified complete activity route"}
+            return {**meta,"status":"available","kind":"historical_terrain","licence":"SRTM / credit NASA and USGS"}
+        except (httpx.HTTPError,ValueError,KeyError):
+            return {"status":"unavailable","reason":"Terrain data unavailable"}
 
     async def forecasts(self, venues):
         latitudes = ",".join(str(v["lat"]) for v in venues)

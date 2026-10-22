@@ -13,10 +13,12 @@ MODELS = {
 }
 
 
-def download(url, path):
-    if path.exists():
+def download(url, path, expected_size=None):
+    if path.exists() and (expected_size is None or path.stat().st_size==expected_size):
         return
     partial = path.with_suffix(path.suffix + ".partial")
+    if path.exists() and not partial.exists():
+        path.replace(partial)
     offset = partial.stat().st_size if partial.exists() else 0
     request = urllib.request.Request(url, headers={"User-Agent": "GeoLens-development/0.1", **({"Range": f"bytes={offset}-"} if offset else {})})
     with urllib.request.urlopen(request, timeout=60) as source:
@@ -24,6 +26,8 @@ def download(url, path):
         with partial.open(mode) as target:
             while chunk := source.read(1024 * 1024):
                 target.write(chunk)
+    if expected_size and partial.stat().st_size!=expected_size:
+        raise RuntimeError(f"Incomplete download: {partial.stat().st_size}/{expected_size} bytes; rerun to resume")
     partial.replace(path)
 
 
@@ -36,14 +40,15 @@ def main():
     repo, revision, name, sha = MODELS[args.model]
     path = directory / name
     print("Downloading pinned model:", repo, flush=True)
-    download(f"https://huggingface.co/{repo}/resolve/{revision}/{name}", path)
+    download(f"https://huggingface.co/{repo}/resolve/{revision}/{name}?download=true", path, 1280835840 if args.model=="2b" else 532517120)
     digest = hashlib.file_digest(path.open("rb"), "sha256").hexdigest()
     if digest != sha:
         raise RuntimeError("Model checksum mismatch; refusing to serve")
-    with urllib.request.urlopen("https://api.github.com/repos/ggml-org/llama.cpp/releases/latest", timeout=30) as response:
-        release = json.load(response)
     suffix = "bin-win-cpu-x64.zip" if platform.system() == "Windows" else "bin-ubuntu-x64.tar.gz"
-    asset = next(a for a in release["assets"] if a["name"].endswith(suffix))
+    with urllib.request.urlopen("https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=8", timeout=30) as response:
+        releases = json.load(response)
+    # /latest may point to a source-only semantic-version release; select a CPU binary release.
+    release,asset=next((r,a) for r in releases for a in r["assets"] if a["name"].endswith(suffix))
     binary = directory / asset["name"]
     download(asset["browser_download_url"], binary)
     runtime = directory / "runtime"

@@ -143,6 +143,9 @@ def evaluate(venues, hours, activity, constraints):
             if any(not h.get("is_day", 1) for h in window) and (activity in {"golf", "hiking"} or constraints.get("daylight_only")):
                 eligibility = "excluded"
                 warnings.append("insufficient_daylight")
+            if constraints.get("end") and end>datetime.fromisoformat(constraints["end"]):
+                eligibility="excluded"
+                warnings.append("outside_requested_window")
             values = {k: [] for k in FACTORS[:3]}
             for h in window:
                 temp = h.get("apparent_temperature")
@@ -156,6 +159,15 @@ def evaluate(venues, hours, activity, constraints):
             penalties["travel"] = clip(venue.get("distance_km", 0) / constraints.get("radius_km", 5))
             road, industry = features.get("road_distance_m"), features.get("industry_distance_m")
             penalties["road_industry"] = None if road is None or industry is None else clip(.6 * math.exp(-road/150) + .4 * math.exp(-industry/1000))
+            if penalties["road_industry"] is not None:
+                directional=[]
+                for h in window:
+                    wind=h.get("wind_kmh")
+                    direction=h.get("wind_direction")
+                    ralign=upwind_alignment(features["road_bearing_deg"],direction) if features.get("road_bearing_deg") is not None and direction is not None and wind is not None and wind>=3.6 else None
+                    ialign=upwind_alignment(features["industry_bearing_deg"],direction) if features.get("industry_bearing_deg") is not None and direction is not None and wind is not None and wind>=3.6 else None
+                    directional.append(.6*math.exp(-road/150)*(.5+.5*ralign if ralign is not None else 1)+.4*math.exp(-industry/1000)*(ialign if ialign is not None else 1))
+                penalties["road_industry"]=clip(max(directional)) if directional else None
             penalties["vegetation"] = None if features.get("green_fraction") is None else 1-clip(features["green_fraction"])
             contributions = [{"factor": k, "weight": round(w, 4), "penalty": penalties[k], "points": None if penalties[k] is None else round(-w*penalties[k], 4)} for k,w in zip(FACTORS, weights)]
             known = sum(c["points"] or 0 for c in contributions)
