@@ -1,0 +1,13 @@
+.venv/
+node_modules/
+frontend/dist/
+__pycache__/
+.pytest_cache/
+.env
+data/
+models/
+*.log
+.impeccable/review/
+New Text Document.txt
+*.mp4
+*.webm
