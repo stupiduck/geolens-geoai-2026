@@ -64,7 +64,8 @@ def test_followup_model_cannot_add_unmentioned_health_flags(monkeypatch):
         return {'activity':'running','location':'Powai','time_expression':None,'time_shift_hours':2,'radius_km':None,'duration_minutes':None,'set_flags':['pregnancy'],'clear_flags':[],'prefer_greener':False},{}
     monkeypatch.setattr(model,'generate',generate)
     patch,_=asyncio.run(model.followup('Two hours later',{'activity':'running','area':{'name':'Powai'},'language':'hi','constraints':{'pollution_sensitive':True}}))
-    assert seen['schema']['properties']['set_flags']['maxItems']==0
+    assert 'flag_changes' not in seen['schema']['properties']
+    assert 'set_flags' not in seen['schema']['properties']
     assert patch['set_flags']==[]
     assert patch['location'] is None
     assert patch['activity'] is None

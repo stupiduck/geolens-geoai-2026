@@ -255,7 +255,7 @@ async def perform(query,identifier,emit):
     inflight+=1
     try:
         async with asyncio.timeout(settings.deadline_seconds):
-            if not await model.ready():
+            if not settings.model_served_id and not await model.ready():
                 raise HTTPException(503,detail={"code":"model_unavailable","message":"The Qwen endpoint is starting or unavailable. Please retry shortly.","request_id":identifier})
             return await run_query(query,identifier,emit)
     except HTTPException:
@@ -287,7 +287,7 @@ async def ready():
 
 @app.get('/version')
 async def version():
-    return {"version":"0.1.0","model":settings.model_id,"model_revision":settings.model_revision,"rule_version":RULE_VERSION,"coding_ai":"OpenAI Codex","hosted_inference":False}
+    return {"version":"0.1.0","model":settings.model_id,"model_revision":settings.model_revision,"rule_version":RULE_VERSION,"coding_ai":"OpenAI Codex","hosted_inference":bool(settings.model_served_id)}
 
 
 def prepare_conversation(query):

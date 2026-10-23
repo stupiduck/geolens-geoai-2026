@@ -1,0 +1,63 @@
+{
+  "endpoint_alias": "geolens-qwen35-2b",
+  "interpretations": [
+    {
+      "question": "Where should I hike tomorrow morning near Lonavala, Maharashtra?",
+      "seconds": 57.464,
+      "intent": {
+        "activity": "hiking",
+        "location": "Lonavala, Maharashtra",
+        "time_expression": "tomorrow morning",
+        "radius_km": null,
+        "duration_minutes": null,
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "commute": false,
+        "language": "en"
+      },
+      "timing": {
+        "elapsed_ms": 57462,
+        "usage": {
+          "prompt_tokens": 153,
+          "total_tokens": 215,
+          "completion_tokens": 62,
+          "prompt_tokens_details": null,
+          "reasoning_tokens": 0
+        }
+      }
+    },
+    {
+      "question": "कल सुबह पवई, मुंबई में अस्थमा के साथ दौड़ना ठीक रहेगा?",
+      "seconds": 1.125,
+      "intent": {
+        "activity": "running",
+        "location": "पवई, मुंबई",
+        "time_expression": "कल सुबह",
+        "radius_km": null,
+        "duration_minutes": null,
+        "pollution_sensitive": true,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "commute": false,
+        "language": "hi"
+      },
+      "timing": {
+        "elapsed_ms": 1124,
+        "usage": {
+          "prompt_tokens": 181,
+          "total_tokens": 258,
+          "completion_tokens": 77,
+          "prompt_tokens_details": {
+            "cached_tokens": 128
+          },
+          "reasoning_tokens": 0
+        }
+      }
+    }
+  ]
+}

@@ -10,7 +10,8 @@ class Settings(BaseSettings):
     model_proxy_secret: SecretStr = SecretStr('')
     model_served_id: str = ""
     model_request_timeout: float = 90
-    model_readiness_timeout: float = 60
+    model_readiness_timeout: float = 15
+    model_startup_grace_seconds: float = 0
     model_id: str = "Qwen/Qwen3.5-2B"
     model_revision: str = "15852e8c16360a2fea060d615a32b45270f8a8fc"
     database: str = "data/geolens.sqlite"

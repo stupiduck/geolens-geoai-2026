@@ -70,22 +70,32 @@ class LocalModel:
         return base+path.removeprefix('/v1') if base.endswith('/v1') else base+path
 
     async def ready(self):
-        try:
-            expected=(settings.model_served_id or settings.model_id.rsplit('/',1)[-1]).casefold()
-            models=await self.client.get(self.endpoint('/v1/models'),timeout=settings.model_readiness_timeout)
-            return models.status_code==200 and any(expected in str(m.get('id','')).casefold() for m in models.json().get('data',[]))
-        except (httpx.HTTPError,ValueError,KeyError):
-            return False
+        deadline=time.monotonic()+settings.model_startup_grace_seconds
+        expected=(settings.model_served_id or settings.model_id.rsplit('/',1)[-1]).casefold()
+        while True:
+            try:
+                models=await self.client.get(self.endpoint('/v1/models'),timeout=settings.model_readiness_timeout)
+                if models.status_code==200:
+                    return any(expected in str(m.get('id','')).casefold() for m in models.json().get('data',[]))
+                if models.status_code not in {502,503,504}:return False
+            except (httpx.HTTPError,ValueError,KeyError):
+                pass
+            if time.monotonic()>=deadline:return False
+            await asyncio.sleep(min(3,max(0,deadline-time.monotonic())))
 
     async def generate(self, system, user, schema, tokens=200):
         begin = time.perf_counter()
         async with self.lock:
-            result = await self.client.post(self.endpoint('/v1/chat/completions'), json={
-                "model": settings.model_served_id or settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-                "temperature": 0, "max_tokens": tokens, "stream": False,
-                "chat_template_kwargs": {"enable_thinking": False},
-                "response_format": {"type": "json_schema", "json_schema": {"name": "geolens", "strict": True, "schema": schema}},
-            })
+            startup_deadline=time.monotonic()+settings.model_startup_grace_seconds
+            while True:
+                result = await self.client.post(self.endpoint('/v1/chat/completions'), json={
+                    "model": settings.model_served_id or settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+                    "temperature": 0, "max_tokens": tokens, "stream": False,
+                    "chat_template_kwargs": {"enable_thinking": False},
+                    "response_format": {"type": "json_schema", "json_schema": {"name": "geolens", "strict": True, "schema": schema}},
+                })
+                if result.status_code not in {502,503,504} or time.monotonic()>=startup_deadline:break
+                await asyncio.sleep(min(3,max(0,startup_deadline-time.monotonic())))
             result.raise_for_status()
             payload = result.json()
             if payload["choices"][0].get("finish_reason")=="length":
@@ -131,15 +141,17 @@ class LocalModel:
             'location':{'type':['string','null']},'time_expression':{'type':['string','null']},
             'time_shift_hours':{'type':['integer','null'],'minimum':-48,'maximum':168},
             'radius_km':{'type':['number','null']},'duration_minutes':{'type':['integer','null']},
-            'set_flags':{'type':'array','maxItems':len(permitted_flags),'items':{'type':'string','enum':permitted_flags or list(FLAGS)}},
-            'clear_flags':{'type':'array','maxItems':len(permitted_flags),'items':{'type':'string','enum':permitted_flags or list(FLAGS)}},
             'prefer_greener':{'type':['boolean','null']}}
+        if permitted_flags:
+            props['flag_changes']={'type':'object','additionalProperties':False,'properties':{key:{'type':'string','enum':['keep','set','clear']} for key in permitted_flags},'required':permitted_flags}
         schema={'type':'object','additionalProperties':False,'properties':props,'required':list(props)}
         patch,timing=await self.generate(
-            'Interpret the latest outdoor-planning MESSAGE as changes to the supplied CONTEXT. Return a JSON PATCH, not an answer. Unchanged or unstated fields MUST be null and flag arrays empty. Never invent a new place. Preserve full location phrases in their original script. Relative later/earlier refers to the previous recommended_time: put signed integer hours in time_shift_hours. Explicit tomorrow/evening/date goes in time_expression instead. Greener or more trees means prefer_greener=true. Only set/clear health or family flags if the MESSAGE explicitly states a change. Office travel means commute. Activity changes must be explicit; a bare place reply changes only location. Example MESSAGE Two hours later returns {"activity":null,"location":null,"time_expression":null,"time_shift_hours":2,"radius_km":null,"duration_minutes":null,"set_flags":[],"clear_flags":[],"prefer_greener":null}. Somewhere greener changes only prefer_greener=true. Do not copy existing values or flags from CONTEXT. Use compact JSON.',
+            'Interpret the latest outdoor-planning MESSAGE as changes to the supplied CONTEXT. Return a JSON PATCH, not an answer. Unchanged or unstated fields MUST be null. In flag_changes use keep for unchanged, set to enable, clear to remove. Never invent a new place. Preserve full location phrases in their original script. Relative later/earlier refers to the previous recommended_time: put signed integer hours in time_shift_hours. Explicit tomorrow/evening/date goes in time_expression instead. Greener or more trees means prefer_greener=true. Only set/clear health or family flags if the MESSAGE explicitly states a change. Office travel means commute. Activity changes must be explicit; a bare place reply changes only location. Example MESSAGE Two hours later returns {"activity":null,"location":null,"time_expression":null,"time_shift_hours":2,"radius_km":null,"duration_minutes":null,"prefer_greener":null}. Somewhere greener changes only prefer_greener=true. Do not copy existing values or flags from CONTEXT. Use compact JSON.',
             json.dumps({'message':question,'context':context},ensure_ascii=False,separators=(',',':')),schema,350)
+        for key,action in patch.pop('flag_changes',{}).items():
+            if action in {'set','clear'}:patch.setdefault(action+'_flags',[]).append(key)
         for action in ('set_flags','clear_flags'):
-            patch[action]=list(dict.fromkeys(k for k in patch[action] if re.search(cues[k],question,re.I)))
+            patch[action]=list(dict.fromkeys(k for k in patch.get(action,[]) if k in cues and re.search(cues[k],question,re.I)))
         if not re.search(r'green|tree|wood|forest|हरियाली|हरा|पेड़|जंगल',question,re.I):patch['prefer_greener']=None
         if not re.search(r'later|earlier|hours?|minutes?|घंट|बाद|पहले',question,re.I):patch['time_shift_hours']=None
         for key in ('activity','time_expression'):
