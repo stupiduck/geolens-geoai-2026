@@ -1,0 +1,56 @@
+{
+  "events": [
+    [
+      "web_search",
+      "Searching official local notices with Tavily"
+    ]
+  ],
+  "result": {
+    "provider": "Tavily",
+    "results": [
+      {
+        "id": "notice-1",
+        "url": "https://srpc.gov.in/wp-content/uploads/2026/09/a147pcsc.pdf",
+        "title": "a147pcsc.pdf - SRPC",
+        "snippet": "carried out. Nodal SLDC, STU & ISGS Stations within the Island 3 Confirmation regarding the operational healthiness and readiness of the Islanding Schemes was requested to be provided. Nodal LDC 4 Continuous monitoring of the Islanding Schemes through SCADA visibility in the LDCs was advised to be ensured. Nodal LDC Agenda for the 147h Meeting of PCSC scheduled to be held on 05th October 2026 24/30 Bengaluru IS KAR SLDC Chennai IS TN SLDC Hyderabad IS TS SLDC Neyveli IS TNSLDC, KERSLDC, [...] from Outage proposed to Remarks 1 NPCIL-MAPS MAPS\u2013230 kV Transmission Line SP-Koil-1 230kV Main-II protection relay: P437, M/s Areva make NPCIL-MAPS Relay proposed to be replaced with alternate model P444, M/s Schneider make, as P437 is not supported by OEM. 23.10.2026 24.10.2026 All entities shall plan the protection system related outages on monthly basis in advance and furnish the same for approv",
+        "published_at": null,
+        "source_type": "official_domain",
+        "verification": "search_excerpt_unverified"
+      },
+      {
+        "id": "notice-2",
+        "url": "https://internal.imd.gov.in/section/nhac/dynamic/allindianew.pdf",
+        "title": "2026-10-22 Time of Issue: 21:02:00 hours IST (Night) ALL ...",
+        "snippet": "South India: Coastal Andhra Pradesh & Yanam, Telangana, Rayalaseema, Coastal Karnataka, North Interior Red color warning does not mean \"Red Alert\" Red color warning means \"Take Action\" Forecast and warning for any day is valid from 0830 hours IST of day till 0830 hours IST of next day For more details kindly visit  or contact 011-2434-4599 (Service to the nation since 1875) Page 22 Karnataka, South Interior Karnataka, Kerala & Mahe, Tamil Nadu, Puducherry & Karaikal and Lakshadweep. [...] ISOL ISOL SCT SCT SCT SCT SCT 25 MARATHWADA ISOL ISOL ISOL ISOL ISOL ISOL ISOL 26 VIDARBHA FWS FWS FWS FWS SCT SCT SCT 27 CHATTISGARH WS WS WS WS WS WS WS 28 COASTAL ANDHRA PRADESH SCT ISOL ISOL ISOL ISOL ISOL ISOL 29 TELANGANA ISOL SCT SCT SCT SCT ISOL ISOL 30 RAYALASEEMA ISOL ISOL ISOL ISOL ISOL ISOL ISOL 31 TAMILNADU & PUDUCHERRY ISOL ISOL ISOL ISOL ISOL ISOL ISOL 32 COSTAL KARNATAKA WS WS WS WS WS W",
+        "published_at": null,
+        "source_type": "official_domain",
+        "verification": "search_excerpt_unverified"
+      },
+      {
+        "id": "notice-3",
+        "url": "http://trai.gov.in/taxonomy/term/200",
+        "title": "Consumer Awareness ( In House ) | Telecom Regulatory Authority of India | Government of India",
+        "snippet": "Consumer Outreach Program at Hassan (Karnataka) by RO BENGALURU\n\nDivision\n\n##### Consumer Outreach Program at Hassan (Karnataka) by RO BENGALURU\n\nDate  \n 22/10/2026\n\nTime  \n 10:00 AM\n\nState  \n Karnataka\n\nDistrict / City  \n Hassan\n\nVenue\n\nDepartment of Computer Science and Engineering, Government Engineering College, B.M.Road, Dairy Circle, Hassan \u2013 573201\n\nEvent Theme  \n Consumer Grievance Redressal in Telecom and Broadcasting [...] Consumer Awareness Program at Udupi (Karnataka) by Coordinated Action of Consumer & Voluntary Organisations of Karnataka (CAOCVO)\n\nDivision\n\n##### Consumer Awareness Program at Udupi (Karnataka) by Coordinated Action of Consumer & Voluntary Organisations of Karnataka (CAOCVO)\n\nDate  \n 24/10/2026\n\nTime  \n 02:30 PM\n\nState  \n Karnataka\n\nDistrict / City  \n Udupi\n\nLocal Contact\n\nName: Somasekhar V K\n\nPhone no:   9448366360\n\nEmail: caocvo@gmail.com\n\nVenue",
+        "published_at": null,
+        "source_type": "official_domain",
+        "verification": "search_excerpt_unverified"
+      },
+      {
+        "id": "notice-4",
+        "url": "https://dgma.gov.in/download/1792644014_6ad993ae92749_r1-final-updated-mopsw-weekly-update-report-21-oct-2026-letter-2.pdf",
+        "title": "fi Ttrqwnt;rrrn*aurr+.ry*$",
+        "snippet": "Jaigarh Port Ltd. 94 24 25 Jawaharlal Nehru Port Authority 215 42 19 Kakinada Seaport Limited 72 74 102 Weekly Update Report to MoPSW | Week ending 9 October 2026 Page 58 of 72 Kattupalli Port Pvt Ltd 19 10 52 Muldwarka Port 0 0 0 Chhara Port 1 1 100 Krishnapatnam Port 45 44 97 Karaikal Port 11 11 100 Karanja Terminal & Logistics Pvt. Ltd. 0 0 0 Karwar Port 4 2 50 Kelshi Port 0 0 0 Kollam Port 0 0 0 Chennai Port Authority 99 65 65 Chennai Port Authority 0 0 0 Magdalla Group Of Ports 26 24 92 [...] DPR consultant; ongoing discussions with potential investor \u2014 Dighi ~2,000 3 1.3\u20132M GT 27,616 DPR under preparation; MDL as anchor shipyard MDL Kendrapada ~2,000 2.5 1.3M GT 24,484 IPA Granted, Agency being onboarded for DPR preparation \u2014 Weekly Update Report to MoPSW | Week ending 9 October 2026 Page 66 of 72 13.3 Implementation Support India Conclave Area Key Activities Status Participation F",
+        "published_at": null,
+        "source_type": "official_domain",
+        "verification": "search_excerpt_unverified"
+      }
+    ],
+    "uncertainty": "Search notices may be incomplete or outdated. No matching notice does not establish that a venue is open. Confirm access with the venue or authority.",
+    "cache": false,
+    "requested": true,
+    "query": "Bengaluru, Karnataka, India running official closure access restrictions events advisory 2026-10-24",
+    "retrieved_at": "2026-10-23T04:35:19.716874+00:00",
+    "status": "found",
+    "credits_reserved": 1
+  }
+}

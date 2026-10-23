@@ -3,6 +3,7 @@ import asyncio
 import hashlib
 import json
 import math
+import re
 import sqlite3
 import time
 from datetime import datetime, timezone
@@ -93,10 +94,21 @@ class Sources:
             return data, {"retrieved_at": datetime.fromtimestamp(saved, timezone.utc).isoformat(), "cache": False, "url": url, "sha256": hashlib.sha256(response.content).hexdigest()}
 
     async def geocode(self, text):
+        # A conversational suffix is not part of a mapped place name. Preserve
+        # directional names (East Side) and words such as Riverside verbatim.
+        parts = []
+        for part in text.split(','):
+            part = part.strip()
+            if not re.fullmatch(r'(?:(?:upper|lower)\s+)?(?:north|south|east|west)\s+side', part, re.I):
+                part = re.sub(r'\s+side$', '', part, flags=re.I)
+            if part:
+                parts.append(part)
+        lookup = ', '.join(parts)
         async with self.geocode_lock:
             await asyncio.sleep(max(0, 1.1-(time.monotonic()-self.last_geocode)))
             try:
-                return await self.fetch("https://nominatim.openstreetmap.org/search", {"q": text, "format": "jsonv2", "countrycodes": "in", "limit": 3, "addressdetails": 1}, 604800)
+                places, meta = await self.fetch("https://nominatim.openstreetmap.org/search", {"q": lookup, "format": "jsonv2", "countrycodes": "in", "limit": 3, "addressdetails": 1}, 604800)
+                return places, {**meta, 'requested_text': text, 'resolved_query': lookup}
             finally:
                 self.last_geocode = time.monotonic()
 

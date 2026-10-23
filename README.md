@@ -2,7 +2,11 @@
 
 Plan outdoor activities across real places and upcoming hours using Qwen3.5-2B, mapped geography and hourly forecasts.
 
-Public deployment and model publication are pending. See `docs/READINESS.md` for validation results and release requirements.
+Website: https://geo.setuconsultants.in · API: https://geo.setuconsultants.in/docs
+
+Model: https://huggingface.co/manavmodi/geolens-geoai-2026
+
+The public core is deployed. Latest optional web-search and contrast changes are available locally and in source; production rollout is held while localhost is reviewed. See `docs/PERFORMANCE.md` for measured timings and costs.
 
 ## Run locally (Windows)
 
@@ -76,7 +80,7 @@ No claim is made that an outdoor activity is safe merely because a forecast/scor
 - OpenFreeMap/OpenMapTiles/OSM: public vector basemap; persistent attribution. https://openfreemap.org/quick_start/
 - AQ advice: EPA/AirNow US-AQI guidance; not a conversion to Indian AQI. https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf
 
-Run without subscriptions, ads, commercial promotion or lead capture under the selected free weather service terms. Do not silently monetize this service without re-evaluating source terms. No paid/private inference/data APIs are used.
+Run without subscriptions, ads, commercial promotion or lead capture under the selected free weather service terms. Do not silently monetize this service without re-evaluating source terms. Local development uses llama.cpp on the local machine. The authorized production configuration uses the existing authenticated Modal endpoint, with spending controls. Optional Tavily search uses the supplied backend key; neither service has been upgraded to a paid plan.
 
 ## Verification and mandatory artifacts
 
@@ -88,9 +92,9 @@ npm.cmd run build --prefix frontend
 npm.cmd audit --prefix frontend
 ```
 
-HF release files/card/upload and clean-load scripts are under `hf-release/` and `scripts/publish_model.py`, `scripts/verify_hf_load.py`. They require the chosen public identity/authentication later; no credentials are printed. A staged card alone does not satisfy the loadable-public-model deliverable. Six-slide and demo-video sources are under `submission/`; final captures/results must be genuine.
+HF release files/card/upload and clean-load scripts are under `hf-release/` and `scripts/publish_model.py`, `scripts/verify_hf_load.py`. The public checkpoint is published under `manavmodi/geolens-geoai-2026`; public-ID loading and generation passed using SHA-verified identical cached weights. See `docs/hf-public-load-verification.json`. No credentials are printed. Six-slide and demo-video sources are under `submission/`; final captures/results must be genuine.
 
-Docker Compose configuration is under `deploy/`. All ports bind loopback by default and the model stays private. Resource limits are provisional until measured in the eventual Linux container environment. Do not run any command against the existing production server without explicit approval. No prune, volume deletion, firewall change or shared-proxy modification is part of this setup.
+Docker Compose configuration is under `deploy/`. All ports bind loopback by default and the model stays private. The isolated production API is capped at 512 MiB / 0.4 CPU and Nginx at 48 MiB / 0.1 CPU. The observed API working set after live queries was 198 MiB; Nginx used 4.2 MiB. See `docs/DEPLOYMENT.md`. No prune, volume deletion, firewall change or shared-proxy modification is part of this setup.
 
 **AI coding disclosure:** OpenAI Codex assisted research, coding, tests and design implementation. No sub-agents were used. Impeccable was used for the product website; visual review was performed in the same session per user instruction. Proprietary coding AI is not called by the running application.
 
@@ -107,3 +111,9 @@ An existing OpenAI-compatible Qwen endpoint can be configured through `GEOLENS_M
 Rule version 2026-10-23.2 uses conservative regional US-AQI planning cutoffs: intense activities avoid at 151, or 101 for sensitive profiles; other activities avoid at 201, or 151 for sensitive profiles. These are planner policies informed by [AirNow guidance](https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf), not personal medical clearance. Rain probability affects suitability and explicit caution, while intense rain, thunder and wind restrictions remain separate.
 
 The header theme switch adapts Rare UI’s ThemeToggle, follows the system theme initially and remembers an explicit local choice. Evidence opens and closes from the same button. Satellite pixels retain their natural colors in either theme.
+
+## Optional web notices
+
+Enable **Web** beside Send to check recent official-domain notices. Set `TAVILY_API_KEY` on the backend only. Searches use basic depth, four results, no generated answer, a seven-second timeout and no retries. A persistent one-hour cache and conservative reservations limit this app to 10 requests/day and 100/month by default. Limits are configurable; zero disables requests. This is an app-level limit, not an account-wide billing guarantee.
+
+Search runs for the first opted-in plan, changed area/activity/day or explicit notice questions. Same-plan follow-ups reuse notices. Notices preserve URLs, retrieval time and publication dates when supplied; missing dates remain unknown. Search excerpts are unverified and never determine venue eligibility, weather or AQ values. No closure notice does not establish that a venue is open. Failures leave the core analysis intact.

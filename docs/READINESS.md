@@ -1,6 +1,6 @@
-# GeoLens local readiness
+# GeoLens readiness history
 
-22 October 2026. Local only. No production server has been accessed or modified.
+The entries below record earlier local stages. The latest release status is in the final entry and docs/DEPLOYMENT.md.
 
 Website: http://localhost:5173. Independent JSON API/OpenAPI: http://127.0.0.1:8000/docs. Readiness: /readyz.
 
@@ -69,3 +69,16 @@ Frontend now uses actual Rare UI AI Status source, with its distinct Commons Cla
 Dark mode added using a controlled Rare UI ThemeToggle adaptation, with a persisted local preference and initial system-theme selection. Street cartography is styled dark; satellite imagery remains unfiltered. Evidence is a repeat-click toggle, with overlay pointer handling so the same desktop button remains accessible. Per request, no additional automated test pass was run for these reversible UI additions. The 71-test result above covers the functional conversation implementation before the theme addition.
 
 Submission presentation and 72-second edited capture walkthrough rebuilt on 23 October. Public publication, Linux-container execution and external endpoint verification remain incomplete gates.
+
+
+## Public core and optional local enhancement, 23 October 2026
+
+Core website and independent API are live at https://geo.setuconsultants.in. Public code: https://github.com/stupiduck/geolens-geoai-2026. Public model: https://huggingface.co/manavmodi/geolens-geoai-2026. Public-ID checkpoint load and generation passed using SHA-verified identical cached weights. The Linux API image passed 71 tests before subsequent adapter/search regressions were added. All ten activities returned successful live Bengaluru results; Lonavala and Hindi conversational retention also passed. These were bounded samples, not a p95 or uptime guarantee.
+
+The latest local suite passes 82 tests; frontend production compilation passes. Optional Tavily notices were verified with a real basic search and mocked failure/cache/budget tests. Dark contrast corrections and optional web search remain local/source-only pending localhost review, per the user's request. No browser visual tests were run for these changes. Local API explicitly uses the local 2B model at 127.0.0.1:8081. Fresh local real-data request: HTTP 200, 15.606 s, no suitable option under current conditions. Production inference was not retested for this enhancement.
+
+Performance and cost facts, including unmeasured first-token latency, are recorded in docs/PERFORMANCE.md. Existing local six-slide deck and edited 72-second screen walkthrough are available; their captures are local, not proof of production UI.
+
+Churchgate conversational geocoding correction: remove the standalone trailing word "side" from lookup clauses, preserving the original message, script and directional proper names. Six regression cases added. All 82 tests pass. No production inference was used for this correction.
+
+Both exact Churchgate messages were verified locally with real Qwen inference and live/cached external data: HTTP 200, eight actual venues each, 10.582 s and 12.661 s. Both resolve to the same Churchgate coordinates. Current conditions produce no_suitable_option, distinct from a geocoding failure. Evidence: churchgate-local-verification.json.

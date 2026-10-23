@@ -95,6 +95,7 @@ def finish(session,question,identifier,events,result=None,error=None):
         'precautions':result.get('precautions',[]) if result else [],'explanations':result.get('explanations',[]) if result else [],
         'result_status':result.get('status') if result else None,'error':error,'events':deepcopy(events),
         'clarification':result.get('clarification') if result else None,
+        'web_notices':result.get('web_notices') if result else None,
         'activity':result.get('normalized_intent',{}).get('activity') if result else None,
         'conversation_change':result.get('conversation_change') if result else None}
     session['messages']=(session['messages']+[message])[-20:]

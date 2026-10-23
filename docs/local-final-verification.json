@@ -1,0 +1,2894 @@
+{
+  "target": "local CPU model and localhost API; no Modal inference",
+  "http": 200,
+  "headers_seconds": 15.606,
+  "first_body_byte_seconds": 15.606,
+  "total_seconds": 15.606,
+  "response": {
+    "request_id": "0b41c98d22624b5eb70d10580c05cda0",
+    "generated_at": "2026-10-23T10:07:02.247188+05:30",
+    "timezone": "Asia/Kolkata",
+    "recommendations": [],
+    "alternatives": [],
+    "avoid_windows": [
+      {
+        "id": "way/547687326@2026-10-24T05:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T05:00:00+05:30",
+        "end": "2026-10-24T06:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 60.57,
+        "score_low": 60.57,
+        "score_high": 60.57,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.375,
+            "points": -7.5
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.33045414796135597,
+            "points": -1.6523
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T05:00:00+05:30",
+          "temperature": 25.7,
+          "apparent_temperature": 30.5,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.2,
+          "wind_direction": 63,
+          "gust_kmh": 6.8,
+          "weather_code": 3,
+          "is_day": 0,
+          "cloud_cover": 91,
+          "us_aqi": 171,
+          "pm2_5": 79.2
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/547687326@2026-10-24T06:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T06:00:00+05:30",
+        "end": "2026-10-24T07:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 62.3,
+        "score_low": 62.3,
+        "score_high": 62.3,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.3333333333333333,
+            "points": -6.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.14999263944019017,
+            "points": -0.75
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T06:00:00+05:30",
+          "temperature": 25.3,
+          "apparent_temperature": 30.0,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.9,
+          "wind_direction": 47,
+          "gust_kmh": 7.9,
+          "weather_code": 2,
+          "is_day": 0,
+          "cloud_cover": 50,
+          "us_aqi": 171,
+          "pm2_5": 78.5
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/547687326@2026-10-24T07:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T07:00:00+05:30",
+        "end": "2026-10-24T08:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 61.65,
+        "score_low": 61.65,
+        "score_high": 61.65,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.36666666666666653,
+            "points": -7.3333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.14798996161492198,
+            "points": -0.7399
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T07:00:00+05:30",
+          "temperature": 26.1,
+          "apparent_temperature": 30.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 5.6,
+          "wind_direction": 48,
+          "gust_kmh": 11.5,
+          "weather_code": 3,
+          "is_day": 1,
+          "cloud_cover": 95,
+          "us_aqi": 171,
+          "pm2_5": 79.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/547687326@2026-10-24T08:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T08:00:00+05:30",
+        "end": "2026-10-24T09:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 58.3,
+        "score_low": 58.3,
+        "score_high": 58.3,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.5333333333333332,
+            "points": -10.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.12550720545440594,
+            "points": -0.6275
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T08:00:00+05:30",
+          "temperature": 28.3,
+          "apparent_temperature": 32.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.6,
+          "wind_direction": 59,
+          "gust_kmh": 14.8,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 45,
+          "us_aqi": 172,
+          "pm2_5": 80.3
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/547687326@2026-10-24T09:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T09:00:00+05:30",
+        "end": "2026-10-24T10:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 54.28,
+        "score_low": 54.28,
+        "score_high": 54.28,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.7333333333333331,
+            "points": -14.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.12963814164614543,
+            "points": -0.6482
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T09:00:00+05:30",
+          "temperature": 31.1,
+          "apparent_temperature": 34.8,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.9,
+          "wind_direction": 57,
+          "gust_kmh": 17.3,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 48,
+          "us_aqi": 172,
+          "pm2_5": 82.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/547687326@2026-10-24T10:00:00+05:30",
+        "venue_id": "way/547687326",
+        "time": "2026-10-24T10:00:00+05:30",
+        "end": "2026-10-24T11:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 51.11,
+        "score_low": 51.11,
+        "score_high": 51.11,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.8916666666666669,
+            "points": -17.8333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.011,
+            "points": -0.11
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.12963814164614543,
+            "points": -0.6482
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T10:00:00+05:30",
+          "temperature": 33.5,
+          "apparent_temperature": 36.7,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 6.2,
+          "wind_direction": 57,
+          "gust_kmh": 20.9,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 34,
+          "us_aqi": 172,
+          "pm2_5": 86.1
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T05:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T05:00:00+05:30",
+        "end": "2026-10-24T06:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 61.02,
+        "score_low": 61.02,
+        "score_high": 61.02,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.375,
+            "points": -7.5
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.19524528145178793,
+            "points": -0.9762
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T05:00:00+05:30",
+          "temperature": 25.7,
+          "apparent_temperature": 30.5,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.2,
+          "wind_direction": 63,
+          "gust_kmh": 6.8,
+          "weather_code": 3,
+          "is_day": 0,
+          "cloud_cover": 91,
+          "us_aqi": 171,
+          "pm2_5": 79.2
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T06:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T06:00:00+05:30",
+        "end": "2026-10-24T07:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 62.03,
+        "score_low": 62.03,
+        "score_high": 62.03,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.3333333333333333,
+            "points": -6.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.15971657391519056,
+            "points": -0.7986
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T06:00:00+05:30",
+          "temperature": 25.3,
+          "apparent_temperature": 30.0,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.9,
+          "wind_direction": 47,
+          "gust_kmh": 7.9,
+          "weather_code": 2,
+          "is_day": 0,
+          "cloud_cover": 50,
+          "us_aqi": 171,
+          "pm2_5": 78.5
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T07:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T07:00:00+05:30",
+        "end": "2026-10-24T08:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 61.36,
+        "score_low": 61.36,
+        "score_high": 61.36,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.36666666666666653,
+            "points": -7.3333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.15923013664903682,
+            "points": -0.7962
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T07:00:00+05:30",
+          "temperature": 26.1,
+          "apparent_temperature": 30.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 5.6,
+          "wind_direction": 48,
+          "gust_kmh": 11.5,
+          "weather_code": 3,
+          "is_day": 1,
+          "cloud_cover": 95,
+          "us_aqi": 171,
+          "pm2_5": 79.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T08:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T08:00:00+05:30",
+        "end": "2026-10-24T09:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 57.94,
+        "score_low": 57.94,
+        "score_high": 57.94,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.5333333333333332,
+            "points": -10.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.15162936855936937,
+            "points": -0.7581
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T08:00:00+05:30",
+          "temperature": 28.3,
+          "apparent_temperature": 32.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.6,
+          "wind_direction": 59,
+          "gust_kmh": 14.8,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 45,
+          "us_aqi": 172,
+          "pm2_5": 80.3
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T09:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T09:00:00+05:30",
+        "end": "2026-10-24T10:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 53.93,
+        "score_low": 53.93,
+        "score_high": 53.93,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.7333333333333331,
+            "points": -14.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.15331205135591483,
+            "points": -0.7666
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T09:00:00+05:30",
+          "temperature": 31.1,
+          "apparent_temperature": 34.8,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.9,
+          "wind_direction": 57,
+          "gust_kmh": 17.3,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 48,
+          "us_aqi": 172,
+          "pm2_5": 82.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/959543435@2026-10-24T10:00:00+05:30",
+        "venue_id": "way/959543435",
+        "time": "2026-10-24T10:00:00+05:30",
+        "end": "2026-10-24T11:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 50.77,
+        "score_low": 50.77,
+        "score_high": 50.77,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.8916666666666669,
+            "points": -17.8333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.033800000000000004,
+            "points": -0.338
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.15331205135591483,
+            "points": -0.7666
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.959,
+            "points": -4.795
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T10:00:00+05:30",
+          "temperature": 33.5,
+          "apparent_temperature": 36.7,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 6.2,
+          "wind_direction": 57,
+          "gust_kmh": 20.9,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 34,
+          "us_aqi": 172,
+          "pm2_5": 86.1
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T05:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T05:00:00+05:30",
+        "end": "2026-10-24T06:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 59.08,
+        "score_low": 59.08,
+        "score_high": 59.08,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.375,
+            "points": -7.5
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.5389233924583166,
+            "points": -2.6946
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T05:00:00+05:30",
+          "temperature": 25.7,
+          "apparent_temperature": 30.5,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.2,
+          "wind_direction": 63,
+          "gust_kmh": 6.8,
+          "weather_code": 3,
+          "is_day": 0,
+          "cloud_cover": 91,
+          "us_aqi": 171,
+          "pm2_5": 79.2
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T06:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T06:00:00+05:30",
+        "end": "2026-10-24T07:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 61.03,
+        "score_low": 61.03,
+        "score_high": 61.03,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.3333333333333333,
+            "points": -6.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.3160897127676845,
+            "points": -1.5804
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T06:00:00+05:30",
+          "temperature": 25.3,
+          "apparent_temperature": 30.0,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.9,
+          "wind_direction": 47,
+          "gust_kmh": 7.9,
+          "weather_code": 2,
+          "is_day": 0,
+          "cloud_cover": 50,
+          "us_aqi": 171,
+          "pm2_5": 78.5
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T07:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T07:00:00+05:30",
+        "end": "2026-10-24T08:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 60.36,
+        "score_low": 60.36,
+        "score_high": 60.36,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.36666666666666653,
+            "points": -7.3333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.316592643157885,
+            "points": -1.583
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T07:00:00+05:30",
+          "temperature": 26.1,
+          "apparent_temperature": 30.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 5.6,
+          "wind_direction": 48,
+          "gust_kmh": 11.5,
+          "weather_code": 3,
+          "is_day": 1,
+          "cloud_cover": 95,
+          "us_aqi": 171,
+          "pm2_5": 79.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T08:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T08:00:00+05:30",
+        "end": "2026-10-24T09:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 56.88,
+        "score_low": 56.88,
+        "score_high": 56.88,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.5333333333333332,
+            "points": -10.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.3201241807715177,
+            "points": -1.6006
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T08:00:00+05:30",
+          "temperature": 28.3,
+          "apparent_temperature": 32.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.6,
+          "wind_direction": 59,
+          "gust_kmh": 14.8,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 45,
+          "us_aqi": 172,
+          "pm2_5": 80.3
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T09:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T09:00:00+05:30",
+        "end": "2026-10-24T10:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 52.88,
+        "score_low": 52.88,
+        "score_high": 52.88,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.7333333333333331,
+            "points": -14.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.31975805037141464,
+            "points": -1.5988
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T09:00:00+05:30",
+          "temperature": 31.1,
+          "apparent_temperature": 34.8,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.9,
+          "wind_direction": 57,
+          "gust_kmh": 17.3,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 48,
+          "us_aqi": 172,
+          "pm2_5": 82.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "way/1360467386@2026-10-24T10:00:00+05:30",
+        "venue_id": "way/1360467386",
+        "time": "2026-10-24T10:00:00+05:30",
+        "end": "2026-10-24T11:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 49.72,
+        "score_low": 49.72,
+        "score_high": 49.72,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.8916666666666669,
+            "points": -17.8333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.055200000000000006,
+            "points": -0.552
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.31975805037141464,
+            "points": -1.5988
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 0.96,
+            "points": -4.8
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T10:00:00+05:30",
+          "temperature": 33.5,
+          "apparent_temperature": 36.7,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 6.2,
+          "wind_direction": 57,
+          "gust_kmh": 20.9,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 34,
+          "us_aqi": 172,
+          "pm2_5": 86.1
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T05:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T05:00:00+05:30",
+        "end": "2026-10-24T06:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 58.34,
+        "score_low": 58.34,
+        "score_high": 58.34,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.375,
+            "points": -7.5
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.5823364467664076,
+            "points": -2.9117
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T05:00:00+05:30",
+          "temperature": 25.7,
+          "apparent_temperature": 30.5,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.2,
+          "wind_direction": 63,
+          "gust_kmh": 6.8,
+          "weather_code": 3,
+          "is_day": 0,
+          "cloud_cover": 91,
+          "us_aqi": 171,
+          "pm2_5": 79.2
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T06:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T06:00:00+05:30",
+        "end": "2026-10-24T07:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 60.96,
+        "score_low": 60.96,
+        "score_high": 60.96,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.3333333333333333,
+            "points": -6.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.22417996429483597,
+            "points": -1.1209
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T06:00:00+05:30",
+          "temperature": 25.3,
+          "apparent_temperature": 30.0,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 3.9,
+          "wind_direction": 47,
+          "gust_kmh": 7.9,
+          "weather_code": 2,
+          "is_day": 0,
+          "cloud_cover": 50,
+          "us_aqi": 171,
+          "pm2_5": 78.5
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T07:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T07:00:00+05:30",
+        "end": "2026-10-24T08:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 60.3,
+        "score_low": 60.3,
+        "score_high": 60.3,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.36666666666666653,
+            "points": -7.3333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.855,
+            "points": -21.375
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.22417996429483597,
+            "points": -1.1209
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T07:00:00+05:30",
+          "temperature": 26.1,
+          "apparent_temperature": 30.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 5.6,
+          "wind_direction": 48,
+          "gust_kmh": 11.5,
+          "weather_code": 3,
+          "is_day": 1,
+          "cloud_cover": 95,
+          "us_aqi": 171,
+          "pm2_5": 79.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T08:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T08:00:00+05:30",
+        "end": "2026-10-24T09:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 56.84,
+        "score_low": 56.84,
+        "score_high": 56.84,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.5333333333333332,
+            "points": -10.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.22417996429483597,
+            "points": -1.1209
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T08:00:00+05:30",
+          "temperature": 28.3,
+          "apparent_temperature": 32.4,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.6,
+          "wind_direction": 59,
+          "gust_kmh": 14.8,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 45,
+          "us_aqi": 172,
+          "pm2_5": 80.3
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T09:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T09:00:00+05:30",
+        "end": "2026-10-24T10:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 52.84,
+        "score_low": 52.84,
+        "score_high": 52.84,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.7333333333333331,
+            "points": -14.6667
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.22417996429483597,
+            "points": -1.1209
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T09:00:00+05:30",
+          "temperature": 31.1,
+          "apparent_temperature": 34.8,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 4.9,
+          "wind_direction": 57,
+          "gust_kmh": 17.3,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 48,
+          "us_aqi": 172,
+          "pm2_5": 82.4
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      },
+      {
+        "id": "node/11697785011@2026-10-24T10:00:00+05:30",
+        "venue_id": "node/11697785011",
+        "time": "2026-10-24T10:00:00+05:30",
+        "end": "2026-10-24T11:00:00+05:30",
+        "duration_minutes": 60,
+        "score": 49.67,
+        "score_low": 49.67,
+        "score_high": 49.67,
+        "eligibility": "avoid",
+        "warning_codes": [
+          "pollution_avoid_intense_activity"
+        ],
+        "limitations": [
+          "opening_hours_unverified",
+          "public_access_unverified"
+        ],
+        "contributions": [
+          {
+            "factor": "thermal",
+            "weight": 20.0,
+            "penalty": 0.8916666666666669,
+            "points": -17.8333
+          },
+          {
+            "factor": "air_quality",
+            "weight": 25.0,
+            "penalty": 0.86,
+            "points": -21.5
+          },
+          {
+            "factor": "rain_wind",
+            "weight": 15.0,
+            "penalty": 0.0,
+            "points": -0.0
+          },
+          {
+            "factor": "venue_fit",
+            "weight": 20.0,
+            "penalty": 0.2,
+            "points": -4.0
+          },
+          {
+            "factor": "travel",
+            "weight": 10.0,
+            "penalty": 0.0874,
+            "points": -0.874
+          },
+          {
+            "factor": "road_industry",
+            "weight": 5.0,
+            "penalty": 0.22417996429483597,
+            "points": -1.1209
+          },
+          {
+            "factor": "vegetation",
+            "weight": 5.0,
+            "penalty": 1.0,
+            "points": -5.0
+          }
+        ],
+        "conditions": {
+          "time": "2026-10-24T10:00:00+05:30",
+          "temperature": 33.5,
+          "apparent_temperature": 36.7,
+          "rain_probability": 0,
+          "rain_mm": 0.0,
+          "wind_kmh": 6.2,
+          "wind_direction": 57,
+          "gust_kmh": 20.9,
+          "weather_code": 1,
+          "is_day": 1,
+          "cloud_cover": 34,
+          "us_aqi": 172,
+          "pm2_5": 86.1
+        },
+        "coverage_complete": true,
+        "rule_version": "2026-10-23.2"
+      }
+    ],
+    "precautions": [
+      "Keep the effort easy, bring water and check access before leaving."
+    ],
+    "evidence": [
+      {
+        "id": "location",
+        "kind": "mapped_feature",
+        "retrieved_at": "2026-10-22T15:55:27.692672+00:00",
+        "cache": true,
+        "url": "https://nominatim.openstreetmap.org/search"
+      },
+      {
+        "id": "venues",
+        "kind": "mapped_feature",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false
+      },
+      {
+        "id": "weather",
+        "retrieved_at": "2026-10-23T04:37:17.499225+00:00",
+        "cache": false,
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sha256": "7f88e55df2dd968611cc31616c541bda048f03c5b0b815740c0a9057c3e40931",
+        "kind": "forecast",
+        "licence": "CC BY 4.0",
+        "attribution": "Open-Meteo / weather model providers"
+      },
+      {
+        "id": "air_quality",
+        "retrieved_at": "2026-10-23T04:37:14.382308+00:00",
+        "cache": false,
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+        "sha256": "427057a72cf0668364b6eaa3b585f55ca2c80c9040833585dd6ec6ed4303c794",
+        "kind": "modeled_air_quality",
+        "resolution_km": 45,
+        "attribution": "Open-Meteo / Copernicus CAMS"
+      },
+      {
+        "id": "geography",
+        "kind": "spatial_proxy",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false,
+        "status": "available"
+      },
+      {
+        "id": "air_quality_policy",
+        "kind": "planning_policy",
+        "url": "https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf",
+        "rule_version": "2026-10-23.2",
+        "note": "Conservative planning cutoffs informed by AirNow; not medical clearance."
+      }
+    ],
+    "limitations": [
+      "US AQI is a regional CAMS Global model (~45 km, native 3-hourly), not a park sensor or Indian CPCB AQI.",
+      "Road/industry/green factors are mapped proxies, not live traffic or pollution concentrations.",
+      "Venue access, opening, booking and current surface conditions require confirmation.",
+      "Suitability scores are policy heuristics, not probabilities or medical clearance."
+    ],
+    "assumptions": [
+      "Search radius: 5 km straight-line; activity duration: 60 minutes.",
+      "Evaluated local start times: 2026-10-24T05:00:00+05:30 to 2026-10-24T11:00:00+05:30."
+    ],
+    "data_status": {
+      "weather": "available",
+      "air_quality": "available",
+      "geography": "available",
+      "live_traffic_available": false,
+      "venue_source": "osm_extract"
+    },
+    "model": {
+      "id": "Qwen/Qwen3.5-2B",
+      "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+      "self_hosted": true,
+      "thinking": false
+    },
+    "rule_version": "2026-10-23.2",
+    "normalized_intent": {
+      "activity": "running",
+      "location": "Powai, Mumbai",
+      "time_expression": "tomorrow morning",
+      "radius_km": null,
+      "duration_minutes": null,
+      "pollution_sensitive": false,
+      "child_present": false,
+      "older_adult": false,
+      "pregnancy": false,
+      "avoid_steep_terrain": false,
+      "commute": false,
+      "language": "en",
+      "constraints": {
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "prefer_greener": false,
+        "radius_km": 5,
+        "duration_minutes": 60,
+        "start": "2026-10-24T05:00:00+05:30",
+        "end": "2026-10-24T11:00:00+05:30"
+      }
+    },
+    "timing_ms": {
+      "intent": {
+        "elapsed_ms": 9369,
+        "usage": {
+          "completion_tokens": 58,
+          "prompt_tokens": 142,
+          "total_tokens": 200,
+          "prompt_tokens_details": {
+            "cached_tokens": 118
+          }
+        }
+      },
+      "total": 15289
+    },
+    "input": {
+      "question": "Where should I run tomorrow morning near Powai, Mumbai?",
+      "language": "en",
+      "selected_location": null
+    },
+    "location": {
+      "latitude": 19.1187195,
+      "longitude": 72.9073476,
+      "name": "Powai, S Ward, Mumbai Zone 6, Mumbai, Mumbai Suburban District, Maharashtra, 400076, India",
+      "radius_km": 5,
+      "id": null
+    },
+    "venues": [
+      {
+        "id": "way/547687326",
+        "name": "Hiranandani Garden",
+        "lat": 19.1192046,
+        "lon": 72.90726843414089,
+        "distance_km": 0.055,
+        "tags": {
+          "addr:city": "Mumbai",
+          "addr:postcode": "400076",
+          "addr:unit": "Powai",
+          "leisure": "park",
+          "name": "Hiranandani Garden"
+        },
+        "features": {
+          "road_distance_m": 139.1,
+          "industry_distance_m": 1457.9,
+          "water_distance_m": 173.5,
+          "green_fraction": 0.041,
+          "road_bearing_deg": 332.2967137178034,
+          "industry_bearing_deg": 254.7836569868515,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9060389,
+                  19.1199218
+                ],
+                [
+                  72.9062223,
+                  19.1192538
+                ],
+                [
+                  72.9063402,
+                  19.1191285
+                ],
+                [
+                  72.9066506,
+                  19.1191442
+                ],
+                [
+                  72.9066852,
+                  19.1191554
+                ],
+                [
+                  72.9070454,
+                  19.1183855
+                ],
+                [
+                  72.9071367,
+                  19.1181781
+                ],
+                [
+                  72.9080649,
+                  19.118785
+                ],
+                [
+                  72.9083529,
+                  19.1193792
+                ],
+                [
+                  72.9069504,
+                  19.1196523
+                ],
+                [
+                  72.9067006,
+                  19.1202054
+                ],
+                [
+                  72.9060389,
+                  19.1199218
+                ]
+              ]
+            ]
+          ]
+        },
+        "_name_key": "hiranandanigarden",
+        "weather_grid": {
+          "lat": 19.156414,
+          "lon": 72.9249
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:35",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "way/959543435",
+        "name": "Unnamed running location · OSM 959543435",
+        "lat": 19.1186005,
+        "lon": 72.90895270516793,
+        "distance_km": 0.169,
+        "tags": {
+          "leisure": "park"
+        },
+        "features": {
+          "road_distance_m": 283.5,
+          "industry_distance_m": 1341.3,
+          "water_distance_m": 321.9,
+          "green_fraction": 0.041,
+          "road_bearing_deg": 331.2953452732723,
+          "industry_bearing_deg": 56.37781233922235,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9085994,
+                  19.1185213
+                ],
+                [
+                  72.9091259,
+                  19.1184408
+                ],
+                [
+                  72.909278,
+                  19.1186797
+                ],
+                [
+                  72.9088248,
+                  19.1187489
+                ],
+                [
+                  72.9085994,
+                  19.1185213
+                ]
+              ]
+            ]
+          ]
+        },
+        "_name_key": "",
+        "weather_grid": {
+          "lat": 19.156414,
+          "lon": 72.9249
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:35",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "way/1360467386",
+        "name": "Powai Lake Bike Pathways",
+        "lat": 19.1211984,
+        "lon": 72.9071555,
+        "distance_km": 0.276,
+        "tags": {
+          "leisure": "track",
+          "name": "Powai Lake Bike Pathways"
+        },
+        "features": {
+          "road_distance_m": 47.6,
+          "industry_distance_m": 1365.8,
+          "water_distance_m": 0.0,
+          "green_fraction": 0.04,
+          "road_bearing_deg": 152.2302469291591,
+          "industry_bearing_deg": 63.898477395347456,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              72.9036374,
+              19.1198061
+            ],
+            [
+              72.9071555,
+              19.1211984
+            ],
+            [
+              72.9075485,
+              19.1214479
+            ],
+            [
+              72.9077962,
+              19.1220773
+            ],
+            [
+              72.9077954,
+              19.1225548
+            ],
+            [
+              72.9067783,
+              19.1226125
+            ],
+            [
+              72.9065683,
+              19.1229887
+            ],
+            [
+              72.9066837,
+              19.1231319
+            ]
+          ]
+        },
+        "_name_key": "powailakebikepathway",
+        "weather_grid": {
+          "lat": 19.156414,
+          "lon": 72.9249
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:35",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "node/11697785011",
+        "name": "Powai Lake Garden",
+        "lat": 19.1198038,
+        "lon": 72.9033493,
+        "distance_km": 0.437,
+        "tags": {
+          "leisure": "garden",
+          "name": "Powai Lake Garden"
+        },
+        "features": {
+          "road_distance_m": 43.7,
+          "industry_distance_m": 1093.8,
+          "water_distance_m": 1.7,
+          "green_fraction": 0.0,
+          "road_bearing_deg": 192.19774588865712,
+          "industry_bearing_deg": 245.48070348450037,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.9033493,
+            19.1198038
+          ]
+        },
+        "_name_key": "powailakegarden",
+        "weather_grid": {
+          "lat": 19.156414,
+          "lon": 72.9249
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:35",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "node/11698035536",
+        "name": "Powai Vihar Park",
+        "lat": 19.1171079,
+        "lon": 72.9029746,
+        "distance_km": 0.493,
+        "tags": {
+          "leisure": "park",
+          "name": "Powai Vihar Park"
+        },
+        "features": {
+          "road_distance_m": 245.1,
+          "industry_distance_m": 964.8,
+          "water_distance_m": 236.1,
+          "green_fraction": 0.0,
+          "road_bearing_deg": 9.373599745997408,
+          "industry_bearing_deg": 260.699280410937,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            72.9029746,
+            19.1171079
+          ]
+        },
+        "_name_key": "powaiviharpark",
+        "weather_grid": {
+          "lat": 19.156414,
+          "lon": 72.9249
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:35",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "way/547896362",
+        "name": "Glen Society Garden",
+        "lat": 19.11503635,
+        "lon": 72.91076127581678,
+        "distance_km": 0.544,
+        "tags": {
+          "leisure": "park",
+          "name": "Glen Society Garden"
+        },
+        "features": {
+          "road_distance_m": 415.5,
+          "industry_distance_m": 1092.7,
+          "water_distance_m": 756.1,
+          "green_fraction": 0.019,
+          "road_bearing_deg": 17.492523667992053,
+          "industry_bearing_deg": 105.40862702116856,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9096213,
+                  19.1146223
+                ],
+                [
+                  72.9096642,
+                  19.1144752
+                ],
+                [
+                  72.9098654,
+                  19.1145234
+                ],
+                [
+                  72.9100183,
+                  19.1145589
+                ],
+                [
+                  72.9103938,
+                  19.1146679
+                ],
+                [
+                  72.9105949,
+                  19.1147287
+                ],
+                [
+                  72.9109141,
+                  19.1148301
+                ],
+                [
+                  72.9113098,
+                  19.1149633
+                ],
+                [
+                  72.9113395,
+                  19.1151094
+                ],
+                [
+                  72.9112634,
+                  19.1152463
+                ],
+                [
+                  72.9111029,
+                  19.1155374
+                ],
+                [
+                  72.9107745,
+                  19.1153177
+                ],
+                [
+                  72.9099904,
+                  19.1149351
+                ],
+                [
+                  72.9096213,
+                  19.1146223
+                ]
+              ]
+            ]
+          ]
+        },
+        "_name_key": "glensocietygarden",
+        "weather_grid": {
+          "lat": 19.086115,
+          "lon": 72.94176
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:34",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "way/613426552",
+        "name": "Verona Garden",
+        "lat": 19.113917700000002,
+        "lon": 72.90924623398215,
+        "distance_km": 0.57,
+        "tags": {
+          "leisure": "park",
+          "name": "Verona Garden"
+        },
+        "features": {
+          "road_distance_m": 591.7,
+          "industry_distance_m": 1226.0,
+          "water_distance_m": 784.7,
+          "green_fraction": 0.097,
+          "road_bearing_deg": 28.388415845701044,
+          "industry_bearing_deg": 97.89516331984588,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9089678,
+                  19.1142557
+                ],
+                [
+                  72.9090256,
+                  19.1141257
+                ],
+                [
+                  72.9091259,
+                  19.1138123
+                ],
+                [
+                  72.9091818,
+                  19.1136741
+                ],
+                [
+                  72.9094908,
+                  19.1138198
+                ],
+                [
+                  72.9093098,
+                  19.1140156
+                ],
+                [
+                  72.909173,
+                  19.1142651
+                ],
+                [
+                  72.9089678,
+                  19.1142557
+                ]
+              ]
+            ]
+          ]
+        },
+        "_name_key": "veronagarden",
+        "weather_grid": {
+          "lat": 19.086115,
+          "lon": 72.94176
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:34",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      },
+      {
+        "id": "way/559429510",
+        "name": "Forest Park",
+        "lat": 19.11339565,
+        "lon": 72.9077079604163,
+        "distance_km": 0.593,
+        "tags": {
+          "addr:city": "Mumbai",
+          "addr:postcode": "400076",
+          "addr:street": "Forest Street",
+          "leisure": "park",
+          "name": "Forest Park",
+          "natural": "wood"
+        },
+        "features": {
+          "road_distance_m": 727.5,
+          "industry_distance_m": 1313.5,
+          "water_distance_m": 777.6,
+          "green_fraction": 0.111,
+          "road_bearing_deg": 37.6005964235656,
+          "industry_bearing_deg": 153.7964383122682,
+          "interpretation": "Mapped features only; absence of a mapped feature does not prove real-world absence"
+        },
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9057696,
+                  19.1128381
+                ],
+                [
+                  72.9072127,
+                  19.1128001
+                ],
+                [
+                  72.9089212,
+                  19.1128381
+                ],
+                [
+                  72.9091712,
+                  19.1131882
+                ],
+                [
+                  72.9089719,
+                  19.1138047
+                ],
+                [
+                  72.9070839,
+                  19.1137479
+                ],
+                [
+                  72.9070276,
+                  19.1136187
+                ],
+                [
+                  72.9063195,
+                  19.1136009
+                ],
+                [
+                  72.9063034,
+                  19.1131726
+                ],
+                [
+                  72.905826,
+                  19.1131904
+                ],
+                [
+                  72.9057696,
+                  19.1128381
+                ]
+              ]
+            ]
+          ]
+        },
+        "_name_key": "forestpark",
+        "weather_grid": {
+          "lat": 19.086115,
+          "lon": 72.94176
+        },
+        "aq_grid": {
+          "lat": 19.099998,
+          "lon": 72.90001,
+          "resolution_km": 45,
+          "kind": "modeled_air_quality",
+          "native_time_step_hours": 3
+        },
+        "daylight": {
+          "time": [
+            "2026-10-23",
+            "2026-10-24",
+            "2026-10-25",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29"
+          ],
+          "sunrise": [
+            "2026-10-23T06:34",
+            "2026-10-24T06:35",
+            "2026-10-25T06:35",
+            "2026-10-26T06:36",
+            "2026-10-27T06:36",
+            "2026-10-28T06:36",
+            "2026-10-29T06:37"
+          ],
+          "sunset": [
+            "2026-10-23T18:09",
+            "2026-10-24T18:09",
+            "2026-10-25T18:08",
+            "2026-10-26T18:08",
+            "2026-10-27T18:07",
+            "2026-10-28T18:06",
+            "2026-10-29T18:06"
+          ]
+        }
+      }
+    ],
+    "evaluated_venues": 8,
+    "evaluated_windows": 48,
+    "status": "no_suitable_option",
+    "answer": "The regional air-quality forecast makes this a poor window for the requested activity under this planner’s exposure policy. Choose a less intense activity, an indoor option or another time. This is a regional forecast, not a local sensor reading.",
+    "conversation_id": "d330909496c1409ca4fc416fc1778a79",
+    "conversation_change": null,
+    "tool_events": [
+      {
+        "stage": "model",
+        "message": "Interpreting activity and constraints",
+        "at": "2026-10-23T10:07:02.247188+05:30",
+        "status": "complete",
+        "elapsed_ms": 9375
+      },
+      {
+        "stage": "location",
+        "message": "Resolving the search area",
+        "at": "2026-10-23T10:07:11.616799+05:30",
+        "status": "complete",
+        "elapsed_ms": 0
+      },
+      {
+        "stage": "venues",
+        "message": "Finding actual mapped activity locations",
+        "at": "2026-10-23T10:07:11.616799+05:30",
+        "status": "complete",
+        "elapsed_ms": 1516
+      },
+      {
+        "stage": "forecasts",
+        "message": "Retrieving hourly conditions for 8 locations",
+        "at": "2026-10-23T10:07:13.131062+05:30",
+        "status": "complete",
+        "elapsed_ms": 4391
+      },
+      {
+        "stage": "scoring",
+        "message": "Comparing complete venue–time windows",
+        "at": "2026-10-23T10:07:17.530245+05:30",
+        "status": "complete",
+        "elapsed_ms": 15
+      },
+      {
+        "stage": "complete",
+        "message": "Analysis complete",
+        "at": "2026-10-23T10:07:17.536007+05:30",
+        "status": "complete",
+        "elapsed_ms": 0
+      }
+    ]
+  }
+}

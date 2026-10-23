@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import SecretStr
+from pydantic import SecretStr, Field, AliasChoices
 
 
 class Settings(BaseSettings):
@@ -22,6 +22,10 @@ class Settings(BaseSettings):
     public_origin: str = "http://localhost:5173"
     max_inflight: int = 5
     deadline_seconds: float = 75
+    tavily_api_key: SecretStr = Field(default=SecretStr(''), validation_alias=AliasChoices('TAVILY_API_KEY', 'GEOLENS_TAVILY_API_KEY', 'tavily_api_key'))
+    web_search_daily_limit: int = Field(10, ge=0, le=100)
+    web_search_monthly_limit: int = Field(100, ge=0, le=1000)
+    web_search_timeout: float = Field(7, ge=1, le=10)
 
 
 settings = Settings()

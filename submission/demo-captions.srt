@@ -20,4 +20,4 @@ Mobile separates Chat, Map, Compare and Details while retaining the same analysi
 
 6
 00:00:58,000 --> 00:01:12,000
-Hindi follow-up preserves the location and activity. One local Qwen model. Public release pending.
+Hindi follow-up preserves the location and activity. One Qwen model. Core: geo.setuconsultants.in. Captures are from localhost.

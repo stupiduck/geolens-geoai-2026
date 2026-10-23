@@ -20,6 +20,7 @@ from .config import settings
 from .engine import ACTIVITIES, RULE_VERSION, DURATIONS, IST, evaluate, compare, resolve_time
 from .model import model
 from .sources import Sources
+from .notices import notices, should_search, UNCERTAINTY
 
 logger = logging.getLogger("geolens")
 app = FastAPI(title="GeoLens", version="0.1.0", description="Evidence-grounded place × time outdoor intelligence. Scores are heuristics, not safety guarantees.")
@@ -78,6 +79,7 @@ class Query(BaseModel):
     question: str = Field(min_length=1,max_length=2000)
     conversation_id: str | None = Field(None,min_length=16,max_length=64)
     language: Literal["auto","en","hi"] = "auto"
+    web_search: bool = False
     location: Location | None = None
     activity: Literal[tuple(ACTIVITIES)] | None = None
     radius_km: float | None = Field(None,ge=.5,le=50)
@@ -242,6 +244,17 @@ async def run_query(query, identifier, emit):
         if constraints.get("pollution_sensitive"):
             result["precautions"].append("Follow your existing clinician/asthma action plan; reduce intensity when air quality is poor. This regional forecast cannot establish personal safety.")
     render_answer(result,language)
+    if should_search(query.web_search, previous, result, query.question):
+        if settings.deadline_seconds - (time.perf_counter() - started) > settings.web_search_timeout + 2:
+            result['web_notices'] = await notices.search(result['location'], activity, start.date().isoformat(), emit)
+        else:
+            result['web_notices'] = {'provider': 'Tavily', 'status': 'unavailable', 'reason': 'analysis_deadline', 'results': [], 'cache': False, 'uncertainty': UNCERTAINTY}
+    elif query.web_search and previous and previous.get('web_notices'):
+        result['web_notices'] = {**deepcopy(previous['web_notices']), 'cache': True, 'reused_from_previous_turn': True}
+    if result.get('web_notices'):
+        web = result['web_notices']
+        result['evidence'].append({'id': 'web_notices', 'kind': 'web_search', 'url': 'https://tavily.com', **{k:v for k,v in web.items() if k != 'results'}})
+        result['limitations'].append(web['uncertainty'])
     result['evidence'].append({'id':'air_quality_policy','kind':'planning_policy','url':'https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf','rule_version':RULE_VERSION,'note':'Conservative planning cutoffs informed by AirNow; not medical clearance.'})
     result["timing_ms"]["total"] = round((time.perf_counter()-started)*1000)
     await emit("complete", "Analysis complete")

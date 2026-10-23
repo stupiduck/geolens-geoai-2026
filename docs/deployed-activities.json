@@ -1,0 +1,112 @@
+[
+  {
+    "activity": "running",
+    "http": 200,
+    "seconds": 6.243,
+    "status": "ok",
+    "interpreted_activity": "running",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "cycling",
+    "http": 200,
+    "seconds": 4.001,
+    "status": "ok",
+    "interpreted_activity": "cycling",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "golf",
+    "http": 200,
+    "seconds": 1.828,
+    "status": "ok",
+    "interpreted_activity": "golf",
+    "venue_count": 3,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "cricket",
+    "http": 200,
+    "seconds": 2.996,
+    "status": "ok",
+    "interpreted_activity": "cricket",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "football",
+    "http": 200,
+    "seconds": 2.883,
+    "status": "ok",
+    "interpreted_activity": "football",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "tennis",
+    "http": 200,
+    "seconds": 3.886,
+    "status": "ok",
+    "interpreted_activity": "tennis",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "hiking",
+    "http": 200,
+    "seconds": 3.97,
+    "status": "ok",
+    "interpreted_activity": "hiking",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "picnic",
+    "http": 200,
+    "seconds": 3.946,
+    "status": "ok",
+    "interpreted_activity": "picnic",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "outdoor_gathering",
+    "http": 200,
+    "seconds": 3.687,
+    "status": "ok",
+    "interpreted_activity": "outdoor_gathering",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  },
+  {
+    "activity": "outdoor_photography",
+    "http": 200,
+    "seconds": 3.708,
+    "status": "ok",
+    "interpreted_activity": "outdoor_photography",
+    "venue_count": 8,
+    "recommended_count": 1,
+    "source": "osm_extract",
+    "error": null
+  }
+]

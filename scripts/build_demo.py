@@ -7,7 +7,7 @@ segments=[('chat-desktop',10,'GeoLens | Edited walkthrough of genuine captured a
 ('chat-evidence',12,'Inspect sources, restrictions and scoring. Regional modeled AQ is not a park sensor.'),
 ('chat-satellite',10,'EOX / Copernicus satellite imagery from 2024. Historical geographic context, not live weather.'),
 ('chat-mobile-map',12,'Mobile separates Chat, Map, Compare and Details while retaining the same analysis.'),
-('chat-hindi',14,'Hindi follow-up preserves the location and activity. One local Qwen model. Public release pending.')]
+('chat-hindi',14,'Hindi follow-up preserves the location and activity. One Qwen model. Core: geo.setuconsultants.in. Captures are from localhost.')]
 
 root=Path(__file__).resolve().parents[1]
 manifest=root/'output/demo.ffconcat';subtitle=root/'submission/demo-captions.srt'
