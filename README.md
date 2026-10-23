@@ -1,8 +1,8 @@
 # GeoLens
 
-An evidence-grounded outdoor planner: real places × upcoming hours, a self-hosted small language model, and an interactive map/time decision surface.
+Plan outdoor activities across real places and upcoming hours using Qwen3.5-2B, mapped geography and hourly forecasts.
 
-**Local implementation. Public API/domain, GitHub identity and HF publication are pending. No production server has been accessed or modified.** Check `docs/READINESS.md` for measured results and outstanding gates; do not treat this README as a deployment or uptime claim.
+Public deployment and model publication are pending. See `docs/READINESS.md` for validation results and release requirements.
 
 ## Run locally (Windows)
 
@@ -23,11 +23,11 @@ npm.cmd run dev --prefix frontend
 
 Website: http://localhost:5173. JSON API/docs: http://127.0.0.1:8000/docs. Health/readiness: `/healthz` and `/readyz`. `.env.example` lists configurable model, cache and URL settings. Nothing needs a browser session or hosted model API key.
 
-Linux uses the same Python/Node commands with Unix virtualenv paths and the downloaded Linux llama-server binary. Model release/quantization provenance and checksum are recorded in `models/local-manifest.json` after verified download. Do not assume a completed filename means the file is valid; the downloader checks length and SHA-256.
+On Linux, use Unix virtualenv paths and the Linux llama-server binary. The downloader verifies file length and SHA-256 and records model provenance in `models/local-manifest.json`.
 
 ## OSM-extract fallback
 
-Public Overpass was unreliable from this development network. A valid imported extract is preferred within its declared coverage; elsewhere the application tries bounded public queries and opens a five-minute circuit after outages. The attributed SQLite/RTree fallback stores genuine OSM geography, never prewritten recommendations. Query-specific numerical computation and live/cache-TTL weather still run.
+Completed OSM extracts are preferred within their coverage. Elsewhere, bounded Overpass queries use a five-minute circuit breaker after outages. Geographic extracts and forecast caches refresh independently; suitability is computed for each query.
 
 ```powershell
 .\.venv\Scripts\python.exe scripts/download_osm.py --region western-zone
@@ -52,9 +52,9 @@ $body = @{question='Where should I run tomorrow morning near Powai, Mumbai?';inc
 Invoke-RestMethod http://127.0.0.1:8000/v1/recommend -Method Post -ContentType application/json -Body $body
 ```
 
-`POST /ask` is the synchronous compatibility route. `POST /v1/analyses` plus polling/SSE provides actual operation progress for the UI; stored snapshots expire and are bounded. `/compare` returns exact contribution differences; `/scenario` recomputes sensitivity using the same source snapshot. No model call occurs on every slider tick.
+`POST /ask` is the synchronous compatibility route. `POST /v1/analyses` supports polling and SSE progress. `/compare` returns contribution differences; `/scenario` recomputes sensitivity from the same evidence snapshot.
 
-Responses include status, normalized intent, assumptions, venues, recommendations/alternatives, restrictions, source metadata, model identity and timings. Clarification/no-suitable-option/insufficient-data are legitimate domain results. Overload is bounded; unavailable inference returns 503, deadline 504 and invalid input 422. No canned answer substitutes for failed inference.
+Responses include intent, venues, recommendations, restrictions, evidence, model identity and timings. Domain outcomes include clarification, no suitable option and insufficient data. Unavailable inference returns HTTP 503, deadlines 504 and invalid input 422.
 
 Supported activities: running, cycling, golf, cricket, football, tennis, hiking/nature walk, picnic, outdoor gathering, photography. Commute-specific route planning currently returns explicit clarification/unavailability; it does not invent a route. Exact opening-hours parsing, booking, full-trip route verification and country-polygon validation remain limitations.
 
