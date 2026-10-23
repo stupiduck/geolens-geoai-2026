@@ -1,4 +1,4 @@
-"""One resident local model. No hosted inference or cosmetic fallback answer."""
+"""One configured Qwen model; structured intent and grounded comparison."""
 import asyncio
 import json
 import time
@@ -191,11 +191,11 @@ class LocalModel:
                     if count==2:
                         break
         schema={'type':'object','additionalProperties':False,'properties':{
-            'preferred_id':{'type':'string','enum':list(aliases)},
+            'preferred_id':{'type':'string','enum':[next(iter(aliases))]},
             'claim_ids':{'type':'array','minItems':1 if claims else 0,'maxItems':2 if claims else 0,'items':{'type':'string',**({'enum':list(claims)} if claims else {})}}},'required':['preferred_id','claim_ids']}
         brief=[{'id':alias,'score':o['score'],'bounds':[o['score_low'],o['score_high']],'temperature':o['conditions'].get('temperature'),'us_aqi':o['conditions'].get('us_aqi'),'penalties':{c['factor']:round(c['penalty'],3) if c['penalty'] is not None else None for c in o['contributions'] if c['factor'] in {'thermal','travel','road_industry'}}} for alias,o in aliases.items()]
         result,timing=await self.generate(
-            'Compare real eligible options for this person. Select a strong option using score bounds and relevant trade-offs. Choose 1 or 2 supplied TRUE claim_ids that explain your selection or a meaningful alternative. Prefer explanatory factors to simply higher_score. Lower penalties are better. For a sensitive person prioritize air quality and road context. Unknown is not zero. Return only the chosen option and claim IDs.',
+            'Compare real eligible options for this person. Option A is the highest ranked eligible option under the supplied constraint-weighted score bounds. Preserve A as preferred_id. Choose 1 or 2 supplied TRUE claim_ids that explain A or a meaningful alternative. Prefer explanatory factors to simply higher_score. Lower penalties are better. For a sensitive person prioritize air quality and road context. Unknown is not zero. Return A and the chosen claim IDs.',
             json.dumps({'sensitive':any(constraints.get(k) for k in ['pollution_sensitive','child_present','older_adult','pregnancy']),'options':brief,'verified_claims':[entry[1] for entry in claims.values()]},ensure_ascii=False,separators=(',',':')),schema,65)
         chosen=aliases[result['preferred_id']]
         if chosen['eligibility']!='eligible':

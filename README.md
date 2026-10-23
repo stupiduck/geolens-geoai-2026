@@ -117,3 +117,9 @@ The header theme switch adapts Rare UI’s ThemeToggle, follows the system theme
 Enable **Web** beside Send to check recent official-domain notices. Set `TAVILY_API_KEY` on the backend only. Searches use basic depth, four results, no generated answer, a seven-second timeout and no retries. A persistent one-hour cache and conservative reservations limit this app to 10 requests/day and 100/month by default. Limits are configurable; zero disables requests. This is an app-level limit, not an account-wide billing guarantee.
 
 Search runs for the first opted-in plan, changed area/activity/day or explicit notice questions. Same-plan follow-ups reuse notices. Notices preserve URLs, retrieval time and publication dates when supplied; missing dates remain unknown. Search excerpts are unverified and never determine venue eligibility, weather or AQ values. No closure notice does not establish that a venue is open. Failures leave the core analysis intact.
+
+## Satellite imagery
+
+EOX Sentinel-2 cloudless 2024 remains the default. To use Esri World Imagery, supply an authorized basemap-only `VITE_ARCGIS_API_KEY` in `frontend/.env.local` before building. This browser-visible key must be origin-restricted; never use an administrator credential. The Esri layer supports zoom levels through 19 with provider attribution. Resolution and acquisition dates vary; imagery is not live and does not affect suitability. No account, subscription or paid plan is created automatically. Esri terms: https://goto.arcgis.com/termsofuse/viewsummary.
+
+The Web Search UI is the actual Rare UI component corresponding to `npx shadcn@latest add swamimalode07/rare-ui/web-search`, vendored at the pinned commit in `frontend/src/vendor/PROVENANCE.md` and adapted to the existing CSS rather than installing duplicate components.

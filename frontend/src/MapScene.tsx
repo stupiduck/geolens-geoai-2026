@@ -4,6 +4,7 @@ import {Map, Marker} from 'maplibre-gl';
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 maplibregl.setWorkerUrl(workerUrl);
 import type {Venue,Option} from './types';
+import {imagery} from './imagery';
 
 export default function MapScene({venues,selected,options,onSelect,layers,showLayers,satellite}:{venues:Venue[];selected:string|null;options:Option[];onSelect:(id:string)=>void;layers?:GeoJSON.FeatureCollection;showLayers:boolean;satellite:boolean}){
   const container=useRef<HTMLDivElement>(null),map=useRef<Map|null>(null),markers=useRef<Marker[]>([]);
@@ -27,7 +28,7 @@ export default function MapScene({venues,selected,options,onSelect,layers,showLa
     const m=map.current;if(!m)return;
     const apply=()=>{
       if(!m.getSource('satellite')){
-        m.addSource('satellite',{type:'raster',tiles:['https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/{z}/{y}/{x}.jpg'],tileSize:256,maxzoom:14,attribution:'<a href="https://maps.eox.at/">EOX::Maps</a> · Contains modified Copernicus Sentinel data 2024 · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>'});
+        m.addSource('satellite',{type:'raster',tiles:imagery.tiles,tileSize:256,maxzoom:imagery.maxzoom,attribution:imagery.attribution});
         const firstLabel=m.getStyle().layers.find(l=>l.type==='symbol')?.id;
         m.addLayer({id:'satellite',type:'raster',source:'satellite',layout:{visibility:'none'}},firstLabel);
       }

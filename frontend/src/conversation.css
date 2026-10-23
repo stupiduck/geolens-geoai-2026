@@ -5,3 +5,5 @@
 .change-note{border-left:2px solid #87a387;padding-left:12px;font-size:13px;line-height:1.6;color:var(--green)}
 
 .conversational .venue-dot{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;font-size:10px;color:#fff;background:#5c7b67;vertical-align:middle}.source small{display:block;margin-top:4px}
+
+.selection-status{font-weight:600!important;color:var(--green)!important;font-size:12px!important;margin:0 0 6px!important}.venue-provenance{font-size:12px;line-height:1.5;color:var(--muted)}.venue-provenance a{color:var(--green);text-decoration:underline;text-underline-offset:3px}

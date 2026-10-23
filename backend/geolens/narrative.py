@@ -16,10 +16,15 @@ ADVICE={
 def render(result,language):
     intent=result.get('normalized_intent',{});activity=intent.get('activity','running')
     if result['status']=='no_suitable_option':
+        result['recommendations']=[]
+        result.pop('summary',None)
         warnings={c for o in result.get('matrix',[]) for c in o['warning_codes']}
+        result['answer']='उपयुक्त विकल्प नहीं मिला। सभी जाँचे गए स्थान और समय इस योजना की शर्तों पर अनुपयुक्त या अपुष्ट हैं। स्कोर केवल तुलना के लिए हैं, बाहर जाने की सलाह नहीं।' if language=='hi' else 'No suitable option was found. Every evaluated venue and time is unsuitable or insufficiently verified under this plan. Scores are comparison only, not a recommendation to go.'
+        if warnings & {'high_rain_probability','heavy_rain_for_activity','thunderstorm','strong_wind_for_activity'}:
+            result['answer']+=' बारिश, तूफान या तेज हवा की पाबंदी पूरी गतिविधि अवधि पर लागू होती है। दूसरा समय या इनडोर विकल्प चुनें।' if language=='hi' else ' Rain, storm or wind restrictions apply across the complete activity window. Choose another time or an indoor alternative.'
         if 'pollution_avoid_intense_activity' in warnings:
-            result['answer']='क्षेत्रीय वायु गुणवत्ता के पूर्वानुमान के कारण इस समय के लिए यह गतिविधि सुझाना उचित नहीं है। कम तीव्रता वाली गतिविधि, इनडोर विकल्प या दूसरा समय चुनें। यह स्थानीय सेंसर का माप नहीं है।' if language=='hi' else 'The regional air-quality forecast makes this a poor window for the requested activity under this planner’s exposure policy. Choose a less intense activity, an indoor option or another time. This is a regional forecast, not a local sensor reading.'
-        result['precautions']=[ADVICE.get(activity,ADVICE['running'])]
+            result['answer']+=' क्षेत्रीय वायु गुणवत्ता भी इस गतिविधि के लिए अनुकूल नहीं है; यह स्थानीय सेंसर का माप नहीं है।' if language=='hi' else ' The regional air-quality forecast also restricts this activity. This is a regional forecast, not a local sensor reading.'
+        result['precautions']=['दूसरा समय या इनडोर विकल्प चुनें। नई योजना से पहले मौसम और प्रवेश की पुष्टि करें।' if language=='hi' else 'Choose another time or an indoor alternative. Recheck conditions and access before making a new outdoor plan.']
         return
     if result['status']!='ok':return
     best=result['recommendations'][0];venue=next(v for v in result['venues'] if v['id']==best['venue_id'])

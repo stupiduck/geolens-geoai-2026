@@ -221,7 +221,9 @@ async def run_query(query, identifier, emit):
         await emit("reasoning", "Comparing evidence with the local small model")
         reasoning,rt = await model.reason(shortlist,constraints)
         result["timing_ms"]["comparison"] = rt
-        preferred = next(o for o in shortlist if o["id"]==reasoning["preferred_id"])
+        preferred = ordered[0]
+        reasoning['preferred_id'] = preferred['id']
+        result['ranking_policy'] = 'Eligible windows only; highest score lower bound, then midpoint; stable venue/time tie-break. The model selects verified comparative evidence, not an override of eligibility or ranking.'
         best = next(v for v in venues if v["id"]==preferred["venue_id"])
         time_label = datetime.fromisoformat(preferred["time"]).strftime("%d %b, %H:%M")
         near_tie = len(shortlist)>1 and preferred["score_low"]<=max(o["score_high"] for o in shortlist if o["id"]!=preferred["id"])

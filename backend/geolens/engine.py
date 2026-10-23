@@ -7,7 +7,9 @@ from astral import Observer
 from astral.sun import elevation
 
 IST = ZoneInfo("Asia/Kolkata")
-RULE_VERSION = "2026-10-23.2"
+RULE_VERSION = "2026-10-23.3"
+# Conservative outing policies, not calibrated safety probabilities. Applied to
+# every forecast hour, independently of the relative suitability score.
 INTENSE_ACTIVITIES={'running','cycling','cricket','football','tennis','hiking'}
 # thermal, AQ, rain/wind, activity fit, travel, geographic context, green
 ACTIVITIES = {
@@ -25,6 +27,8 @@ ACTIVITIES = {
 FACTORS = ["thermal", "air_quality", "rain_wind", "venue_fit", "travel", "road_industry", "vegetation"]
 DURATIONS = {"golf": 180, "hiking": 120, "picnic": 120, "outdoor_gathering": 120}
 SPORTS = {"tennis": "tennis", "golf": "golf", "cricket": "cricket", "football": "soccer"}
+RAIN_LIMITS = {a: (60 if a in {'picnic','outdoor_gathering','tennis'} else 70 if a in {'golf','cricket','football'} else 80,
+                   2 if a in {'picnic','outdoor_gathering','tennis','golf'} else 5) for a in ACTIVITIES}
 
 
 def clip(value):
@@ -116,6 +120,12 @@ def evaluate(venues, hours, activity, constraints):
             eligibility = "eligible"
             tags, features = venue["tags"], venue.get("features", {})
             fit = activity_fit(venue, activity)
+            if activity in {'picnic','outdoor_gathering'}:
+                named = bool(tags.get('name') or tags.get('name:en') or (venue.get('name') and not venue['name'].startswith('Unnamed ')))
+                appropriate = tags.get('leisure') in {'park','garden','recreation_ground'} or tags.get('tourism') == 'picnic_site'
+                if not named or not appropriate or not venue.get('metadata',{}).get('destination_evidence_sufficient',True):
+                    eligibility = 'insufficient_data'
+                    limits.append('unverified_picnic_destination')
             if activity=='outdoor_photography':
                 solar=elevation(Observer(venue['lat'],venue['lon']),start)
                 fit=clip(abs(solar+1)/12) if constraints.get('photography_goal')=='sunset' else clip((abs(solar-10)-5)/30)
@@ -137,6 +147,19 @@ def evaluate(venues, hours, activity, constraints):
             if any(h.get("weather_code") in (95, 96, 99) for h in window):
                 eligibility = "avoid" if eligibility != "excluded" else eligibility
                 warnings.append("thunderstorm")
+            probability_limit, amount_limit = RAIN_LIMITS[activity]
+            weather_restrictions = [
+                ('high_rain_probability', any(h.get('rain_probability') is not None and h['rain_probability'] >= probability_limit for h in window)),
+                ('heavy_rain_for_activity', any(h.get('rain_mm') is not None and h['rain_mm'] >= amount_limit for h in window)),
+                ('strong_wind_for_activity', any(h.get('wind_kmh') is not None and h['wind_kmh'] >= (30 if activity in {'cycling','golf','picnic','outdoor_gathering'} else 40) for h in window)),
+            ]
+            for code, applies in weather_restrictions:
+                if applies:
+                    eligibility = 'avoid' if eligibility != 'excluded' else eligibility
+                    warnings.append(code)
+            if any(any(h.get(k) is None for k in ('apparent_temperature','rain_probability','rain_mm','wind_kmh')) for h in window):
+                eligibility = 'insufficient_data' if eligibility == 'eligible' else eligibility
+                limits.append('essential_weather_unavailable')
             if constraints.get('child_present') and features.get('water_distance_m') is not None and features['water_distance_m']<100:
                 warnings.append('near_water_supervise_children')
             aq = [h["us_aqi"] for h in window if h.get("us_aqi") is not None]

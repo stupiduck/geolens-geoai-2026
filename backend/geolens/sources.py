@@ -198,7 +198,14 @@ class Sources:
                 continue
             candidates.append({"id": f"{e['type']}/{e['id']}", "name": tags.get("name") or tags.get("name:en") or f"Unnamed {activity.replace('_',' ')} location · OSM {e['id']}", "lat": center.y, "lon": center.x,
                 "distance_km": round(distance,3), "tags": tags, "features": {}, "geometry": e.get("geojson"),'_name_key':normalized_name})
-        candidates.sort(key=lambda v: (v["tags"].get("access") in {"private","customers","members"}, v["distance_km"]))
+        for candidate in candidates:
+            tags = candidate['tags']
+            candidate['metadata'] = {'osm_url': 'https://www.openstreetmap.org/' + candidate['id'], 'has_mapped_name': bool(tags.get('name') or tags.get('name:en')), 'mapped_type': tags.get('leisure') or tags.get('tourism') or tags.get('highway') or tags.get('route'), 'access': tags.get('access', 'unverified')}
+            if activity in {'picnic','outdoor_gathering'}:
+                g = shape(candidate['geometry']) if candidate.get('geometry') else None
+                area_m2 = round(transform(Transformer.from_crs(4326,6933,always_xy=True).transform,g).area) if g is not None and g.is_valid and g.geom_type in {'Polygon','MultiPolygon'} else None
+                candidate['metadata'].update(footprint_area_m2=area_m2, destination_evidence_sufficient=bool(candidate['metadata']['has_mapped_name'] and (tags.get('tourism')=='picnic_site' or (tags.get('leisure') in {'park','garden','recreation_ground'} and area_m2 is not None and area_m2>=1000))))
+        candidates.sort(key=lambda v: (v["tags"].get("access") in {"private","customers","members"}, activity in {'picnic','outdoor_gathering'} and not v['metadata']['destination_evidence_sufficient'], v["distance_km"]))
         return candidates[:8], meta
 
     async def features(self, lat, lon, radius, venues):
