@@ -141,6 +141,7 @@ class LocalModel:
         for action in ('set_flags','clear_flags'):
             patch[action]=list(dict.fromkeys(k for k in patch[action] if re.search(cues[k],question,re.I)))
         if not re.search(r'green|tree|wood|forest|हरियाली|हरा|पेड़|जंगल',question,re.I):patch['prefer_greener']=None
+        if not re.search(r'later|earlier|hours?|minutes?|घंट|बाद|पहले',question,re.I):patch['time_shift_hours']=None
         for key in ('activity','time_expression'):
             if patch.get(key)==context.get(key):patch[key]=None
         if isinstance(context.get('area'),dict) and patch.get('location')==context['area'].get('name'):patch['location']=None

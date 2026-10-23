@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 
 
 def prior():
-    return {'request_id':'prior','normalized_intent':{'activity':'running','language':'hi','location':'पवई, मुंबई','constraints':{'pollution_sensitive':True,'duration_minutes':60,'start':'2026-10-24T06:00:00+05:30','end':'2026-10-24T10:00:00+05:30'}},'location':{'latitude':19.1,'longitude':72.9,'name':'Powai'},'recommendations':[{'time':'2026-10-24T07:00:00+05:30'}]}
+    return {'request_id':'prior','normalized_intent':{'activity':'running','language':'hi','location':'पवई, मुंबई','constraints':{'pollution_sensitive':True,'duration_minutes':60,'start':'2026-10-24T06:00:00+05:30','end':'2026-10-24T10:00:00+05:30'}},'location':{'latitude':19.1,'longitude':72.9,'name':'Powai'},'recommendations':[{'venue_id':'way/fixture','time':'2026-10-24T07:00:00+05:30'}]}
 
 
 def test_followup_retains_typed_health_place_and_language():
@@ -70,3 +70,16 @@ def test_followup_model_cannot_add_unmentioned_health_flags(monkeypatch):
     assert patch['activity'] is None
     assert patch['prefer_greener'] is None
     assert patch['language']=='hi'
+
+
+def test_language_only_followup_cannot_shrink_the_time_window(monkeypatch):
+    import asyncio
+    async def generate(*args):
+        return {'activity':None,'location':None,'time_expression':None,'time_shift_hours':0,'radius_km':None,'duration_minutes':None,'set_flags':[],'clear_flags':[],'prefer_greener':None},{}
+    monkeypatch.setattr(model,'generate',generate)
+    source=prior()
+    patch,_=asyncio.run(model.followup('हिंदी में बताइए',conversation.context(source)))
+    merged=conversation.merge(source,patch)
+    assert patch['time_shift_hours'] is None
+    assert merged['_time_range'][0].hour==6
+    assert merged['_time_range'][1].hour==10
