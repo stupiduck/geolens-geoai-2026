@@ -105,3 +105,5 @@ Actual pipeline events include status and measured stage duration. The frontend 
 An existing OpenAI-compatible Qwen endpoint can be configured through `GEOLENS_MODEL_URL`. Optional `GEOLENS_MODEL_API_KEY` or Modal proxy key/secret settings are server-only. Never expose credentials in Vite variables. The local verified default remains the single resident llama.cpp model. No new hosted deployment is created by this configuration.
 
 Rule version 2026-10-23.2 uses conservative regional US-AQI planning cutoffs: intense activities avoid at 151, or 101 for sensitive profiles; other activities avoid at 201, or 151 for sensitive profiles. These are planner policies informed by [AirNow guidance](https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf), not personal medical clearance. Rain probability affects suitability and explicit caution, while intense rain, thunder and wind restrictions remain separate.
+
+The header theme switch adapts Rare UI’s ThemeToggle, follows the system theme initially and remembers an explicit local choice. Evidence opens and closes from the same button. Satellite pixels retain their natural colors in either theme.

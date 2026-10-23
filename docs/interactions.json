@@ -1,0 +1,46 @@
+{
+  "http_status": 200,
+  "elapsed_seconds": 47.255,
+  "request_id": "46884cc2c1324ac0ba627504fa223514",
+  "venues": 8,
+  "comparison": {
+    "snapshot_id": "46884cc2c1324ac0ba627504fa223514",
+    "before_id": "way/547687326@2026-10-23T06:00:00+05:30",
+    "after_id": "way/547687326@2026-10-23T05:00:00+05:30",
+    "score_delta": -0.9135,
+    "before_eligibility": "eligible",
+    "after_eligibility": "eligible",
+    "contributions": [
+      {
+        "factor": "thermal",
+        "delta": -0.8333
+      },
+      {
+        "factor": "air_quality",
+        "delta": 0.0
+      },
+      {
+        "factor": "rain_wind",
+        "delta": 0.0
+      },
+      {
+        "factor": "venue_fit",
+        "delta": 0.0
+      },
+      {
+        "factor": "travel",
+        "delta": 0.0
+      },
+      {
+        "factor": "road_industry",
+        "delta": -0.0802
+      },
+      {
+        "factor": "vegetation",
+        "delta": 0.0
+      }
+    ]
+  },
+  "scenario_status": "no_suitable_option",
+  "scenario_policy_consistent": true
+}

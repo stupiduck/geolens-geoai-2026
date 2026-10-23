@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:10,000
+GeoLens | Edited walkthrough of genuine captured application screens.
+
+2
+00:00:10,000 --> 00:00:24,000
+Two hours later: typed conversation retains Lonavala and hiking while comparing the new time.
+
+3
+00:00:24,000 --> 00:00:36,000
+Inspect sources, restrictions and scoring. Regional modeled AQ is not a park sensor.
+
+4
+00:00:36,000 --> 00:00:46,000
+EOX / Copernicus satellite imagery from 2024. Historical geographic context, not live weather.
+
+5
+00:00:46,000 --> 00:00:58,000
+Mobile separates Chat, Map, Compare and Details while retaining the same analysis.
+
+6
+00:00:58,000 --> 00:01:12,000
+Hindi follow-up preserves the location and activity. One local Qwen model. Public release pending.

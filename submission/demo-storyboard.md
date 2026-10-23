@@ -1,12 +1,12 @@
-# GeoLens demo — 80 seconds
+# GeoLens edited demo
 
-00–07: Actual place × time comparison; show a meaningful measured change first.
-07–17: Fresh question and real pipeline stages. Label any accelerated wait.
-17–30: Winner/conditional shortlist, multiple actual venues, hourly forecasts.
-30–44: Change time or pollution sensitivity; show exact contribution and eligibility changes.
-44–55: Source timestamps, OSM geography and ~45 km regional modeled AQ limitation.
-55–65: Actual Hindi interaction from the same local model.
-65–74: curl JSON response, model manifest and real loadable model repository.
-74–80: Architecture and one limitation. Include actual public links only after publication.
+72-second walkthrough assembled from genuine local application captures on 23 October 2026. This is an edited still-screen video, not a continuous live recording.
 
-Capture only the working application. No simulated progress, invented weather, fictional venues or fake live answer. Recorded snapshots must be labeled with capture time. Keep attribution legible.
+1. Desktop Lonavala hiking query, real local Qwen and retrieved forecasts.
+2. Two hours later, 07:00 to 09:00, typed context retained and conditions recomputed.
+3. Evidence ledger and regional AQ limitations.
+4. Historical EOX / Copernicus 2024 satellite map toggle.
+5. Mobile Map, with separate Chat, Compare and Details tabs.
+6. Hindi follow-up using the same model and retained place/activity.
+
+Public code/model links and external API remain release gates. No invented measurements, fake tool progress or confidence percentages. Coding AI: OpenAI Codex. Rare UI attribution and OSM/source credits remain visible.

@@ -59,3 +59,5 @@ Selection synchronizes the venue marker, hour, weather summary, ranking and exac
 
 ## Do's and Don'ts
 Initial map has no analysis. Only an actually captured snapshot may be offered as a labeled saved result. Loading follows real work. Outages, missing venue/access/terrain/AQ, no-suitable-option and model unavailability remain visible. OSM/OpenFreeMap attribution is persistent.
+
+Dark mode uses forest charcoal surfaces, sage ink accents and matching map controls. It preserves suitability and avoidance distinctions. A compact Rare UI theme slider persists the choice; historical satellite imagery keeps original colors.

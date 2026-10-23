@@ -4,9 +4,8 @@
     "count": 1,
     "metadata": {
       "retrieved_at": "2026-10-22T15:23:32.298695+00:00",
-      "cache": false,
-      "url": "https://nominatim.openstreetmap.org/search",
-      "sha256": "15ba198e87198933b4e611e4fad6809f19642dc026cf141c561dd8629f815ce4"
+      "cache": true,
+      "url": "https://nominatim.openstreetmap.org/search"
     },
     "sample": [
       {
@@ -44,26 +43,178 @@
     ]
   },
   "venues": {
-    "ok": false,
-    "error": "No imported OSM extract available; run scripts/import_osm.py"
+    "ok": true,
+    "count": 8,
+    "metadata": {
+      "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+      "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+      "osm_base": "2026-10-20T20:23:47Z",
+      "licence": "ODbL",
+      "attribution": "© OpenStreetMap contributors / Geofabrik",
+      "mode": "osm_extract",
+      "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+      "cache": false
+    },
+    "sample": [
+      {
+        "id": "way/547687326",
+        "name": "Hiranandani Garden",
+        "lat": 19.1192046,
+        "lon": 72.90726843414089,
+        "distance_km": 0.055,
+        "tags": {
+          "addr:city": "Mumbai",
+          "addr:postcode": "400076",
+          "addr:unit": "Powai",
+          "leisure": "park",
+          "name": "Hiranandani Garden"
+        },
+        "features": {},
+        "geometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  72.9060389,
+                  19.1199218
+                ],
+                [
+                  72.9062223,
+                  19.1192538
+                ],
+                [
+                  72.9063402,
+                  19.1191285
+                ],
+                [
+                  72.9066506,
+                  19.1191442
+                ],
+                [
+                  72.9066852,
+                  19.1191554
+                ],
+                [
+                  72.9070454,
+                  19.1183855
+                ],
+                [
+                  72.9071367,
+                  19.1181781
+                ],
+                [
+                  72.9080649,
+                  19.118785
+                ],
+                [
+                  72.9083529,
+                  19.1193792
+                ],
+                [
+                  72.9069504,
+                  19.1196523
+                ],
+                [
+                  72.9067006,
+                  19.1202054
+                ],
+                [
+                  72.9060389,
+                  19.1199218
+                ]
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "way/547687326",
+        "name": "Hiranandani Garden",
+        "lat": 19.1196523,
+        "lon": 72.9069504,
+        "distance_km": 0.112,
+        "tags": {
+          "addr:city": "Mumbai",
+          "addr:postcode": "400076",
+          "addr:unit": "Powai",
+          "leisure": "park",
+          "name": "Hiranandani Garden"
+        },
+        "features": {},
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              72.9066852,
+              19.1191554
+            ],
+            [
+              72.9066506,
+              19.1191442
+            ],
+            [
+              72.9063402,
+              19.1191285
+            ],
+            [
+              72.9062223,
+              19.1192538
+            ],
+            [
+              72.9060389,
+              19.1199218
+            ],
+            [
+              72.9067006,
+              19.1202054
+            ],
+            [
+              72.9069504,
+              19.1196523
+            ],
+            [
+              72.9083529,
+              19.1193792
+            ],
+            [
+              72.9080649,
+              19.118785
+            ],
+            [
+              72.9071367,
+              19.1181781
+            ],
+            [
+              72.9070454,
+              19.1183855
+            ],
+            [
+              72.9066852,
+              19.1191554
+            ]
+          ]
+        }
+      }
+    ]
   },
   "forecasts": {
     "ok": true,
     "metadata": {
       "weather": {
-        "retrieved_at": "2026-10-22T15:24:16.610929+00:00",
+        "retrieved_at": "2026-10-22T15:54:23.186374+00:00",
         "cache": false,
         "url": "https://api.open-meteo.com/v1/forecast",
-        "sha256": "cc6cfd461adcd9088cee24d3a5769a448c4b1f0b6bff5bbcaa005ecab8453915",
+        "sha256": "df37d5f50190b19c4b30c9e183e04ed794f3f9aaa0b5b9ca2f9692bdce307f1b",
         "kind": "forecast",
         "licence": "CC BY 4.0",
         "attribution": "Open-Meteo / weather model providers"
       },
       "air_quality": {
-        "retrieved_at": "2026-10-22T15:24:16.675159+00:00",
+        "retrieved_at": "2026-10-22T15:54:23.248568+00:00",
         "cache": false,
         "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
-        "sha256": "e46c838f1fea620130aa9c2eae58fde8a173db5e63f6ec5686278ff4a1d723e6",
+        "sha256": "ddda0f6113855f055a9b34cae6759bfb378475fc9cac9faa8bdcd009c0b1bfe5",
         "kind": "modeled_air_quality",
         "resolution_km": 45,
         "attribution": "Open-Meteo / Copernicus CAMS"

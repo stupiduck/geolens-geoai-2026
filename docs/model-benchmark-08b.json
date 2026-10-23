@@ -1,0 +1,104 @@
+{
+  "model": "Qwen/Qwen3.5-0.8B",
+  "quantization": "Q4_K_M",
+  "threads": 2,
+  "context": 4096,
+  "thinking": false,
+  "host": "local AMD Ryzen AI 9 HX 370; not production server",
+  "cases": [
+    {
+      "question": "Where should I run tomorrow morning near Powai, Mumbai?",
+      "json": {
+        "activity": "running",
+        "location": "Powai, Mumbai",
+        "time_expression": "tomorrow morning",
+        "radius_km": null,
+        "duration_minutes": null,
+        "pollution_sensitive": true,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "commute": false,
+        "language": "en"
+      },
+      "timing": {
+        "elapsed_ms": 4200,
+        "usage": {
+          "completion_tokens": 69,
+          "prompt_tokens": 142,
+          "total_tokens": 211,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      },
+      "wall_seconds": 4.201
+    },
+    {
+      "question": "कल सुबह पवई मुंबई के पास दौड़ने के लिए कौन सी जगह बेहतर रहेगी?",
+      "json": {
+        "activity": "outdoor_photography",
+        "location": "मुंबई के पास",
+        "time_expression": "कल सुबह",
+        "radius_km": null,
+        "duration_minutes": null,
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": true,
+        "commute": false,
+        "language": "hi"
+      },
+      "timing": {
+        "elapsed_ms": 4653,
+        "usage": {
+          "completion_tokens": 92,
+          "prompt_tokens": 162,
+          "total_tokens": 254,
+          "prompt_tokens_details": {
+            "cached_tokens": 118
+          }
+        }
+      },
+      "wall_seconds": 4.654
+    },
+    {
+      "question": "I have asthma. Find outdoor tennis tomorrow evening within 5 km of Bandra, Mumbai.",
+      "json": {
+        "activity": "tennis",
+        "location": "Bandra, Mumbai",
+        "time_expression": "tomorrow evening",
+        "radius_km": 5,
+        "duration_minutes": 10,
+        "pollution_sensitive": true,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "commute": false,
+        "language": "en"
+      },
+      "timing": {
+        "elapsed_ms": 3255,
+        "usage": {
+          "completion_tokens": 71,
+          "prompt_tokens": 149,
+          "total_tokens": 220,
+          "prompt_tokens_details": {
+            "cached_tokens": 118
+          }
+        }
+      },
+      "wall_seconds": 3.255
+    }
+  ],
+  "processes": [
+    {
+      "name": "llama-server.exe",
+      "rss_mib": 989.7,
+      "cpu_seconds": 25.75
+    }
+  ]
+}

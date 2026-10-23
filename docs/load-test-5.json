@@ -1,0 +1,929 @@
+{
+  "concurrency": 5,
+  "results": [
+    {
+      "index": 0,
+      "http_status": 200,
+      "seconds": 19.284,
+      "status": "ok",
+      "detail": null,
+      "timing_ms": {
+        "intent": {
+          "elapsed_ms": 10166,
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 142,
+            "total_tokens": 200,
+            "prompt_tokens_details": {
+              "cached_tokens": 138
+            }
+          }
+        },
+        "comparison": {
+          "elapsed_ms": 8343,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 536,
+            "total_tokens": 552,
+            "prompt_tokens_details": {
+              "cached_tokens": 532
+            }
+          }
+        },
+        "total": 19077
+      }
+    },
+    {
+      "index": 1,
+      "http_status": 200,
+      "seconds": 20.987,
+      "status": "ok",
+      "detail": null,
+      "timing_ms": {
+        "intent": {
+          "elapsed_ms": 16309,
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 142,
+            "total_tokens": 200,
+            "prompt_tokens_details": {
+              "cached_tokens": 138
+            }
+          }
+        },
+        "comparison": {
+          "elapsed_ms": 4083,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 536,
+            "total_tokens": 552,
+            "prompt_tokens_details": {
+              "cached_tokens": 532
+            }
+          }
+        },
+        "total": 20897
+      }
+    },
+    {
+      "index": 2,
+      "http_status": 200,
+      "seconds": 17.335,
+      "status": "ok",
+      "detail": null,
+      "timing_ms": {
+        "intent": {
+          "elapsed_ms": 3660,
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 142,
+            "total_tokens": 200,
+            "prompt_tokens_details": {
+              "cached_tokens": 118
+            }
+          }
+        },
+        "comparison": {
+          "elapsed_ms": 11446,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 536,
+            "total_tokens": 552,
+            "prompt_tokens_details": {
+              "cached_tokens": 532
+            }
+          }
+        },
+        "total": 17284
+      }
+    },
+    {
+      "index": 3,
+      "http_status": 200,
+      "seconds": 18.232,
+      "status": "ok",
+      "detail": null,
+      "timing_ms": {
+        "intent": {
+          "elapsed_ms": 6964,
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 142,
+            "total_tokens": 200,
+            "prompt_tokens_details": {
+              "cached_tokens": 138
+            }
+          }
+        },
+        "comparison": {
+          "elapsed_ms": 10659,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 536,
+            "total_tokens": 552,
+            "prompt_tokens_details": {
+              "cached_tokens": 532
+            }
+          }
+        },
+        "total": 18155
+      }
+    },
+    {
+      "index": 4,
+      "http_status": 200,
+      "seconds": 20.074,
+      "status": "ok",
+      "detail": null,
+      "timing_ms": {
+        "intent": {
+          "elapsed_ms": 13249,
+          "usage": {
+            "completion_tokens": 58,
+            "prompt_tokens": 142,
+            "total_tokens": 200,
+            "prompt_tokens_details": {
+              "cached_tokens": 138
+            }
+          }
+        },
+        "comparison": {
+          "elapsed_ms": 6060,
+          "usage": {
+            "completion_tokens": 16,
+            "prompt_tokens": 536,
+            "total_tokens": 552,
+            "prompt_tokens_details": {
+              "cached_tokens": 532
+            }
+          }
+        },
+        "total": 19986
+      }
+    }
+  ],
+  "resource_samples": [
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.9,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1503.8,
+        "cpu_percent": 0.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 11.1
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1504.9,
+        "cpu_percent": 147.1
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.6,
+        "cpu_percent": 194.2
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.6,
+        "cpu_percent": 200.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 194.6
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 203.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.1,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 194.3
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.2,
+        "cpu_percent": 8.1
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 194.7
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.4,
+        "cpu_percent": 36.8
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.5,
+        "cpu_percent": 191.9
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 140.4,
+        "cpu_percent": 33.3
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.5,
+        "cpu_percent": 194.6
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 141.4,
+        "cpu_percent": 123.2
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.5,
+        "cpu_percent": 194.7
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 119.2,
+        "cpu_percent": 25.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.3,
+        "cpu_percent": 194.6
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 119.2,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1519.1,
+        "cpu_percent": 197.4
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 137.8,
+        "cpu_percent": 111.2
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.5,
+        "cpu_percent": 194.3
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.0,
+        "cpu_percent": 47.2
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.6,
+        "cpu_percent": 200.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.0,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 186.5
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.0,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1509.4,
+        "cpu_percent": 203.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.0,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.1,
+        "cpu_percent": 194.6
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 139.0,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.3,
+        "cpu_percent": 197.1
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 144.1,
+        "cpu_percent": 139.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 197.3
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 144.5,
+        "cpu_percent": 16.2
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 197.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 144.5,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 189.4
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 144.5,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 191.9
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 144.5,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 203.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 147.6,
+        "cpu_percent": 83.8
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 192.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 149.9,
+        "cpu_percent": 89.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.6,
+        "cpu_percent": 200.2
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 149.9,
+        "cpu_percent": 2.8
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1513.5,
+        "cpu_percent": 188.5
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 149.9,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1531.3,
+        "cpu_percent": 205.4
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 149.9,
+        "cpu_percent": 2.8
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 186.5
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 149.9,
+        "cpu_percent": 5.4
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1499.7,
+        "cpu_percent": 186.3
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.6,
+        "cpu_percent": 137.1
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1502.5,
+        "cpu_percent": 194.2
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1509.4,
+        "cpu_percent": 200.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1503.2,
+        "cpu_percent": 197.1
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 2.9
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1502.3,
+        "cpu_percent": 189.2
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1499.5,
+        "cpu_percent": 197.0
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1503.3,
+        "cpu_percent": 186.5
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 2.7
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 191.9
+      }
+    ],
+    [
+      {
+        "pid": 12612,
+        "name": "python.exe",
+        "rss_mib": 150.7,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 21152,
+        "name": "python.exe",
+        "rss_mib": 4.8,
+        "cpu_percent": 0.0
+      },
+      {
+        "pid": 43572,
+        "name": "llama-server.exe",
+        "rss_mib": 1507.4,
+        "cpu_percent": 200.2
+      }
+    ]
+  ],
+  "hardware": "Local Ryzen AI 9 HX 370, 24 logical processors; llama.cpp set to 2 threads; Windows RSS is not Linux container memory",
+  "peak_model_rss_mib": 1531.3
+}

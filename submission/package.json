@@ -1,0 +1,1 @@
+{"name":"geolens-submission","private":true,"scripts":{"slides":"node build_slides.cjs"},"dependencies":{"pptxgenjs":"4.0.1"}}

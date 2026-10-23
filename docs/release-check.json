@@ -1,0 +1,370 @@
+[
+  {
+    "question": "Can I cycle to work tomorrow?",
+    "seconds": 3.525,
+    "http_status": 200,
+    "status": "needs_clarification",
+    "intent": {
+      "activity": "cycling",
+      "location": "work",
+      "time_expression": "tomorrow",
+      "radius_km": null,
+      "duration_minutes": null,
+      "pollution_sensitive": false,
+      "child_present": false,
+      "older_adult": false,
+      "pregnancy": false,
+      "avoid_steep_terrain": false,
+      "commute": true,
+      "language": "en"
+    },
+    "location": null,
+    "venues": 0,
+    "detail": null,
+    "answer": "Please supply your starting area and destination for commute planning. Route-level commute analysis is not yet available in this build.",
+    "evidence": []
+  },
+  {
+    "question": "Where should I hike tomorrow morning near Lonavala, Maharashtra?",
+    "seconds": 5.586,
+    "http_status": 200,
+    "status": "ok",
+    "intent": {
+      "activity": "hiking",
+      "location": "Lonavala, Maharashtra",
+      "time_expression": "tomorrow morning",
+      "radius_km": null,
+      "duration_minutes": null,
+      "pollution_sensitive": false,
+      "child_present": false,
+      "older_adult": false,
+      "pregnancy": false,
+      "avoid_steep_terrain": false,
+      "commute": false,
+      "language": "en",
+      "constraints": {
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "radius_km": 5,
+        "duration_minutes": 120,
+        "start": "2026-10-23T05:00:00+05:30",
+        "end": "2026-10-23T11:00:00+05:30"
+      }
+    },
+    "location": {
+      "latitude": 18.7503694,
+      "longitude": 73.4069436,
+      "name": "Lonavala, Mahatma Gandhi Road, Summer Hill, Lonavala, Mawal Subdistrict, Pune, Maharashtra, 410400, India",
+      "radius_km": 5
+    },
+    "venues": 8,
+    "detail": null,
+    "answer": "Mapped hiking location at 23 Oct, 07:00 IST: heuristic suitability 80–80/100. Confirm access and opening hours.",
+    "evidence": [
+      {
+        "id": "location",
+        "kind": "mapped_feature",
+        "retrieved_at": "2026-10-22T17:28:50.075648+00:00",
+        "cache": true,
+        "url": "https://nominatim.openstreetmap.org/search"
+      },
+      {
+        "id": "venues",
+        "kind": "mapped_feature",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false
+      },
+      {
+        "id": "terrain",
+        "status": "unavailable",
+        "reason": "No sufficiently long mapped route segment geometry"
+      },
+      {
+        "id": "weather",
+        "retrieved_at": "2026-10-22T17:29:36.305630+00:00",
+        "cache": true,
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "kind": "forecast",
+        "licence": "CC BY 4.0",
+        "attribution": "Open-Meteo / weather model providers"
+      },
+      {
+        "id": "air_quality",
+        "retrieved_at": "2026-10-22T17:29:37.398835+00:00",
+        "cache": true,
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+        "kind": "modeled_air_quality",
+        "resolution_km": 45,
+        "attribution": "Open-Meteo / Copernicus CAMS"
+      },
+      {
+        "id": "geography",
+        "kind": "spatial_proxy",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false,
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "question": "कल सुबह पवई मुंबई के पास दौड़ने के लिए कौन सी जगह बेहतर रहेगी?",
+    "seconds": 11.779,
+    "http_status": 200,
+    "status": "ok",
+    "intent": {
+      "activity": "running",
+      "location": "पवई मुंबई",
+      "time_expression": "कल सुबह",
+      "radius_km": null,
+      "duration_minutes": null,
+      "pollution_sensitive": false,
+      "child_present": false,
+      "older_adult": false,
+      "pregnancy": false,
+      "avoid_steep_terrain": false,
+      "commute": false,
+      "language": "hi",
+      "constraints": {
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "radius_km": 5,
+        "duration_minutes": 60,
+        "start": "2026-10-23T05:00:00+05:30",
+        "end": "2026-10-23T11:00:00+05:30"
+      }
+    },
+    "location": {
+      "latitude": 19.1187195,
+      "longitude": 72.9073476,
+      "name": "Powai, S Ward, Mumbai Zone 6, Mumbai, Mumbai Suburban District, Maharashtra, 400076, India",
+      "radius_km": 5
+    },
+    "venues": 8,
+    "detail": null,
+    "answer": "Hiranandani Garden | 23 Oct, 06:00 IST. उपयुक्तता 66–66/100। प्रवेश और समय की पुष्टि करें।",
+    "evidence": [
+      {
+        "id": "location",
+        "kind": "mapped_feature",
+        "retrieved_at": "2026-10-22T15:55:58.310054+00:00",
+        "cache": true,
+        "url": "https://nominatim.openstreetmap.org/search"
+      },
+      {
+        "id": "venues",
+        "kind": "mapped_feature",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false
+      },
+      {
+        "id": "weather",
+        "retrieved_at": "2026-10-22T17:33:18.478933+00:00",
+        "cache": false,
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sha256": "85e070dbbdaa651cf1d8f8e94790dba0ae7a8c39f86bf530a3321ef897ad8722",
+        "kind": "forecast",
+        "licence": "CC BY 4.0",
+        "attribution": "Open-Meteo / weather model providers"
+      },
+      {
+        "id": "air_quality",
+        "retrieved_at": "2026-10-22T17:16:05.090231+00:00",
+        "cache": true,
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+        "kind": "modeled_air_quality",
+        "resolution_km": 45,
+        "attribution": "Open-Meteo / Copernicus CAMS"
+      },
+      {
+        "id": "geography",
+        "kind": "spatial_proxy",
+        "url": "https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T15:37:13.985184+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false,
+        "status": "available"
+      }
+    ]
+  },
+  {
+    "question": "Where should I run tomorrow morning in Bengaluru, Karnataka?",
+    "seconds": 38.827,
+    "http_status": 503,
+    "status": null,
+    "intent": null,
+    "location": null,
+    "venues": 0,
+    "detail": {
+      "code": "source_or_model_failure",
+      "message": "Overpass unavailable: ReadTimeout,ReadTimeout",
+      "request_id": "e1c61ef5d2684f959fb54f225083c507"
+    },
+    "answer": null,
+    "timing_ms": null,
+    "evidence": null
+  },
+  {
+    "question": "Where should I run tomorrow morning in Bengaluru, Karnataka?",
+    "seconds": 27.284,
+    "http_status": 503,
+    "status": null,
+    "intent": null,
+    "location": null,
+    "venues": 0,
+    "detail": {
+      "code": "source_or_model_failure",
+      "message": "Overpass unavailable: HTTPStatusError,ReadTimeout",
+      "request_id": "e186f60351ef461998d18e7a5343277d"
+    },
+    "answer": null,
+    "timing_ms": null,
+    "evidence": null
+  },
+  {
+    "question": "Where should I run tomorrow morning in Bengaluru, Karnataka?",
+    "seconds": 14.397,
+    "http_status": 200,
+    "status": "ok",
+    "intent": {
+      "activity": "running",
+      "location": "Bengaluru, Karnataka",
+      "time_expression": "tomorrow morning",
+      "radius_km": null,
+      "duration_minutes": null,
+      "pollution_sensitive": false,
+      "child_present": false,
+      "older_adult": false,
+      "pregnancy": false,
+      "avoid_steep_terrain": false,
+      "commute": false,
+      "language": "en",
+      "constraints": {
+        "pollution_sensitive": false,
+        "child_present": false,
+        "older_adult": false,
+        "pregnancy": false,
+        "avoid_steep_terrain": false,
+        "radius_km": 5,
+        "duration_minutes": 60,
+        "start": "2026-10-23T05:00:00+05:30",
+        "end": "2026-10-23T11:00:00+05:30"
+      }
+    },
+    "location": {
+      "latitude": 12.9767936,
+      "longitude": 77.590082,
+      "name": "Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, India",
+      "radius_km": 5
+    },
+    "venues": 8,
+    "detail": null,
+    "answer": "Mapped running location at 23 Oct, 05:00 IST: heuristic suitability 86–86/100. Confirm access and opening hours.",
+    "timing_ms": {
+      "intent": {
+        "elapsed_ms": 3285,
+        "usage": {
+          "completion_tokens": 60,
+          "prompt_tokens": 142,
+          "total_tokens": 202,
+          "prompt_tokens_details": {
+            "cached_tokens": 138
+          }
+        }
+      },
+      "comparison": {
+        "elapsed_ms": 6234,
+        "usage": {
+          "completion_tokens": 13,
+          "prompt_tokens": 512,
+          "total_tokens": 525,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      },
+      "total": 12636
+    },
+    "evidence": [
+      {
+        "id": "location",
+        "kind": "mapped_feature",
+        "retrieved_at": "2026-10-22T17:34:49.272759+00:00",
+        "cache": true,
+        "url": "https://nominatim.openstreetmap.org/search"
+      },
+      {
+        "id": "venues",
+        "kind": "mapped_feature",
+        "url": "https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T17:19:09.646391+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false
+      },
+      {
+        "id": "weather",
+        "retrieved_at": "2026-10-22T17:48:48.865008+00:00",
+        "cache": false,
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sha256": "a3745d8d85d041cc514a448dccdfd01326a269298f178c184ce53f7b20c3482d",
+        "kind": "forecast",
+        "licence": "CC BY 4.0",
+        "attribution": "Open-Meteo / weather model providers"
+      },
+      {
+        "id": "air_quality",
+        "retrieved_at": "2026-10-22T17:48:48.894651+00:00",
+        "cache": false,
+        "url": "https://air-quality-api.open-meteo.com/v1/air-quality",
+        "sha256": "5676fdc4ccae727a850dfc204d3d7d71d4ac3765ce9a297f73ec997932cf6817",
+        "kind": "modeled_air_quality",
+        "resolution_km": 45,
+        "attribution": "Open-Meteo / Copernicus CAMS"
+      },
+      {
+        "id": "geography",
+        "kind": "spatial_proxy",
+        "url": "https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf",
+        "retrieved_at": "2026-10-22T17:19:09.646391+00:00",
+        "osm_base": "2026-10-20T20:23:47Z",
+        "licence": "ODbL",
+        "attribution": "© OpenStreetMap contributors / Geofabrik",
+        "mode": "osm_extract",
+        "extract_age_warning": "Snapshot geography; weather is freshly retrieved",
+        "cache": false,
+        "status": "available"
+      }
+    ]
+  }
+]

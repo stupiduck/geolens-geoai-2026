@@ -1,0 +1,9 @@
+{
+  "repo": "models/hf-staging",
+  "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+  "local_files_only": true,
+  "parameters_loaded": 2213241664,
+  "elapsed_seconds": 115.648,
+  "output": "The first forecast predicts a 70% chance of rain while the second predicts",
+  "purpose": "Original-format load/generation smoke only. No real forecasts were supplied; free-generation output is not environmental evidence. Application reasoning uses verified predicates instead."
+}
