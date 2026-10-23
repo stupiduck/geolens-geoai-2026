@@ -1,0 +1,47 @@
+name: geolens
+services:
+  api:
+    image: geolens-api:release
+    env_file: .env.production
+    volumes:
+      - ./data:/app/data
+    cpus: 0.4
+    mem_limit: 512m
+    pids_limit: 96
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    networks: [private]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: '2'}
+  web:
+    image: geolens-web:release
+    cpus: 0.1
+    mem_limit: 48m
+    pids_limit: 64
+    restart: unless-stopped
+    depends_on:
+      api: {condition: service_healthy}
+    networks: [private, proxy]
+    labels:
+      traefik.enable: 'true'
+      traefik.docker.network: dokploy-network
+      traefik.http.routers.geolens.rule: Host(`geo.setuconsultants.in`)
+      traefik.http.routers.geolens.entrypoints: websecure
+      traefik.http.routers.geolens.tls.certresolver: letsencrypt
+      traefik.http.routers.geolens.service: geolens
+      traefik.http.services.geolens.loadbalancer.server.port: '80'
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: '2'}
+networks:
+  private: {}
+  proxy:
+    external: true
+    name: dokploy-network

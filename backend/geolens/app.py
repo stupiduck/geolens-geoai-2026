@@ -254,9 +254,9 @@ async def perform(query,identifier,emit):
         raise HTTPException(429,detail={"code":"capacity","request_id":identifier},headers={"Retry-After":"5"})
     inflight+=1
     try:
-        if not await model.ready():
-            raise HTTPException(503,detail={"code":"model_unavailable","message":"The configured Qwen endpoint is unavailable. Retry when it is ready.","request_id":identifier})
         async with asyncio.timeout(settings.deadline_seconds):
+            if not await model.ready():
+                raise HTTPException(503,detail={"code":"model_unavailable","message":"The Qwen endpoint is starting or unavailable. Please retry shortly.","request_id":identifier})
             return await run_query(query,identifier,emit)
     except HTTPException:
         raise

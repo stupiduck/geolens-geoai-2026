@@ -63,7 +63,7 @@ class LocalModel:
         if settings.model_api_key.get_secret_value():headers['Authorization']='Bearer '+settings.model_api_key.get_secret_value()
         if settings.model_proxy_key.get_secret_value():headers['Modal-Key']=settings.model_proxy_key.get_secret_value()
         if settings.model_proxy_secret.get_secret_value():headers['Modal-Secret']=settings.model_proxy_secret.get_secret_value()
-        self.client = httpx.AsyncClient(timeout=40,headers=headers)
+        self.client = httpx.AsyncClient(timeout=settings.model_request_timeout,headers=headers)
 
     def endpoint(self,path):
         base=settings.model_url.rstrip('/')
@@ -71,8 +71,8 @@ class LocalModel:
 
     async def ready(self):
         try:
-            expected=settings.model_id.rsplit('/',1)[-1].casefold()
-            models=await self.client.get(self.endpoint('/v1/models'),timeout=3)
+            expected=(settings.model_served_id or settings.model_id.rsplit('/',1)[-1]).casefold()
+            models=await self.client.get(self.endpoint('/v1/models'),timeout=settings.model_readiness_timeout)
             return models.status_code==200 and any(expected in str(m.get('id','')).casefold() for m in models.json().get('data',[]))
         except (httpx.HTTPError,ValueError,KeyError):
             return False
@@ -81,7 +81,7 @@ class LocalModel:
         begin = time.perf_counter()
         async with self.lock:
             result = await self.client.post(self.endpoint('/v1/chat/completions'), json={
-                "model": settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+                "model": settings.model_served_id or settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
                 "temperature": 0, "max_tokens": tokens, "stream": False,
                 "chat_template_kwargs": {"enable_thinking": False},
                 "response_format": {"type": "json_schema", "json_schema": {"name": "geolens", "strict": True, "schema": schema}},
