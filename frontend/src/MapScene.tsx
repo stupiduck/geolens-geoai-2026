@@ -1,14 +1,16 @@
 import {useEffect,useRef} from 'react';
 import * as maplibregl from 'maplibre-gl';
 import {Map, Marker} from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+maplibregl.setWorkerUrl(workerUrl);
 import type {Venue,Option} from './types';
 
-export default function MapScene({venues,selected,options,onSelect,layers,showLayers}:{venues:Venue[];selected:string|null;options:Option[];onSelect:(id:string)=>void;layers?:GeoJSON.FeatureCollection;showLayers:boolean}){
+export default function MapScene({venues,selected,options,onSelect,layers,showLayers,satellite}:{venues:Venue[];selected:string|null;options:Option[];onSelect:(id:string)=>void;layers?:GeoJSON.FeatureCollection;showLayers:boolean;satellite:boolean}){
   const container=useRef<HTMLDivElement>(null),map=useRef<Map|null>(null),markers=useRef<Marker[]>([]);
   const callback=useRef(onSelect);callback.current=onSelect;
   useEffect(()=>{
     if(!container.current)return;
-    const m=new Map({container:container.current,style:'https://tiles.openfreemap.org/styles/positron',center:[72.918,19.113],zoom:11.7,attributionControl:{compact:false},maxPitch:45});
+    const m=new Map({container:container.current,style:'https://tiles.openfreemap.org/styles/positron',center:[79,22],zoom:4.2,attributionControl:{},canvasContextAttributes:{preserveDrawingBuffer:true},maxPitch:45});
     map.current=m;
     m.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
     m.addControl(new maplibregl.ScaleControl({unit:'metric'}),'bottom-right');
@@ -23,23 +25,38 @@ export default function MapScene({venues,selected,options,onSelect,layers,showLa
   },[]);
   useEffect(()=>{
     const m=map.current;if(!m)return;
+    const apply=()=>{
+      if(!m.getSource('satellite')){
+        m.addSource('satellite',{type:'raster',tiles:['https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2024_3857/default/g/{z}/{y}/{x}.jpg'],tileSize:256,maxzoom:14,attribution:'<a href="https://maps.eox.at/">EOX::Maps</a> · Contains modified Copernicus Sentinel data 2024 · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>'});
+        const firstLabel=m.getStyle().layers.find(l=>l.type==='symbol')?.id;
+        m.addLayer({id:'satellite',type:'raster',source:'satellite',layout:{visibility:'none'}},firstLabel);
+      }
+      m.setLayoutProperty('satellite','visibility',satellite?'visible':'none');
+    };
+    if(m.isStyleLoaded())apply();else m.once('load',apply);
+    return()=>{m.off('load',apply)};
+  },[satellite]);
+  useEffect(()=>{
+    const m=map.current;if(!m)return;
     markers.current.forEach(marker=>marker.remove());
-    const ranked=[...options].sort((a,b)=>b.score-a.score);
-    markers.current=venues.map(v=>{
-      const option=options.find(o=>o.venue_id===v.id),rank=ranked.findIndex(o=>o.venue_id===v.id)+1;
+    markers.current=venues.map((v,index)=>{
+      const option=options.find(o=>o.venue_id===v.id),rank=index+1;
       const button=document.createElement('button');
       button.className=`venue-marker ${v.id===selected?'selected':''} ${option?.eligibility==='avoid'?'avoid':''}`;
       button.textContent=String(rank||'·');button.setAttribute('aria-label',`Select ${v.name}`);
       button.addEventListener('click',()=>callback.current(v.id));
       return new Marker({element:button}).setLngLat([v.lon,v.lat]).addTo(m);
     });
+    m.resize();m.triggerRepaint();
   },[venues,selected,options]);
-  const lastVenueKey=useRef('');
   useEffect(()=>{
     const m=map.current;if(!m||!venues.length)return;
-    const key=venues.map(v=>v.id).join();if(lastVenueKey.current===key)return;lastVenueKey.current=key;
     const bounds=new maplibregl.LngLatBounds();venues.forEach(v=>bounds.extend([v.lon,v.lat]));
-    m.fitBounds(bounds,{padding:window.innerWidth>800?{left:420,right:100,top:110,bottom:260}:70,maxZoom:14,duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:800});
+    const fit=()=>{if(m.getContainer().clientWidth<100||m.getContainer().clientHeight<100)return;m.fitBounds(bounds,{padding:60,maxZoom:14,duration:window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:500})};
+    fit();
+    const observer=new ResizeObserver(()=>{m.resize();fit();m.triggerRepaint()});
+    observer.observe(m.getContainer());
+    return()=>observer.disconnect();
   },[venues]);
   useEffect(()=>{
     const m=map.current;if(!m)return;

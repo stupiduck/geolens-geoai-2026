@@ -1,9 +1,13 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import SecretStr
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="GEOLENS_", env_file=".env", extra="ignore")
     model_url: str = "http://127.0.0.1:8081"
+    model_api_key: SecretStr = SecretStr('')
+    model_proxy_key: SecretStr = SecretStr('')
+    model_proxy_secret: SecretStr = SecretStr('')
     model_id: str = "Qwen/Qwen3.5-2B"
     model_revision: str = "15852e8c16360a2fea060d615a32b45270f8a8fc"
     database: str = "data/geolens.sqlite"

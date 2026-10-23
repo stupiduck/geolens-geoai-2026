@@ -7,7 +7,8 @@ from astral import Observer
 from astral.sun import elevation
 
 IST = ZoneInfo("Asia/Kolkata")
-RULE_VERSION = "2026-10-22.1"
+RULE_VERSION = "2026-10-23.2"
+INTENSE_ACTIVITIES={'running','cycling','cricket','football','tennis','hiking'}
 # thermal, AQ, rain/wind, activity fit, travel, geographic context, green
 ACTIVITIES = {
     "running": [20, 25, 15, 20, 10, 5, 5],
@@ -51,14 +52,14 @@ def resolve_time(expression, now=None):
             start = midnight
         return max(start, now), start + timedelta(days=2 if now.weekday() != 6 else 1)
     day = midnight
-    if "tomorrow" in text or "कल" in text:
+    if "tomorrow" in text or "कल" in text or re.search(r'\bkal\b',text):
         day += timedelta(days=1)
     for name, index in [("monday",0),("tuesday",1),("wednesday",2),("thursday",3),("friday",4),("saturday",5),("sunday",6)]:
         if name in text:
             day = midnight + timedelta(days=(index - now.weekday()) % 7)
-    if any(x in text for x in ("morning", "सुबह")):
+    if any(x in text for x in ("morning", "सुबह", "subah")):
         start, end = day.replace(hour=5), day.replace(hour=11)
-    elif any(x in text for x in ("evening", "after work", "शाम")):
+    elif any(x in text for x in ("evening", "after work", "शाम", "shaam", "sham")):
         start, end = day.replace(hour=17), day.replace(hour=21)
     elif "afternoon" in text or "दोपहर" in text:
         start, end = day.replace(hour=12), day.replace(hour=17)
@@ -95,7 +96,9 @@ def evaluate(venues, hours, activity, constraints):
     if sensitive:
         weights[1] *= 1.5
         weights[5] *= 1.5
-        weights = [w * 100 / sum(weights) for w in weights]
+    if constraints.get('prefer_greener'):
+        weights[6]=max(weights[6],5)*2
+    weights = [w * 100 / sum(weights) for w in weights]
     results = []
     for venue in venues:
         own_hours = venue.get("hours", hours)
@@ -141,7 +144,9 @@ def evaluate(venues, hours, activity, constraints):
                 limits.append("regional_air_quality_unavailable")
                 if sensitive and eligibility == "eligible":
                     eligibility = "insufficient_data"
-            if aq and max(aq) >= (151 if sensitive else 201):
+            # Conservative planning cutoffs, not a medical definition of safety.
+            cutoff=101 if sensitive and activity in INTENSE_ACTIVITIES else 151 if sensitive or activity in INTENSE_ACTIVITIES else 201
+            if aq and max(aq) >= cutoff:
                 if eligibility != "excluded":
                     eligibility = "avoid"
                 warnings.append("pollution_avoid_intense_activity")

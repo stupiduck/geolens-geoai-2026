@@ -61,7 +61,7 @@ def test_private_venue_cannot_win_public_request():
 
 def test_sensitive_profile_tightens_pollution_advice():
     h = hours()[:1]
-    h[0]["us_aqi"] = 180
+    h[0]["us_aqi"] = 120
     general = evaluate([venue()], h, "tennis", {})[0]
     sensitive = evaluate([venue()], h, "tennis", {"pollution_sensitive": True})[0]
     assert general["eligibility"] != "avoid"
@@ -73,8 +73,10 @@ def test_sensitive_profile_tightens_pollution_advice():
 def test_identical_environment_and_profile_have_consistent_aq_policy(profile,aq):
     from copy import deepcopy
     h=hours()[:1];h[0]['us_aqi']=aq
-    expected='avoid' if aq >= (151 if profile else 201) else 'eligible'
     for activity in ACTIVITIES:
+        intense=activity in {'running','cycling','cricket','football','tennis','hiking'}
+        cutoff=101 if profile and intense else 151 if profile or intense else 201
+        expected='avoid' if aq>=cutoff else 'eligible'
         v=venue();v['tags']={'access':'yes','leisure':'park','sport':{'tennis':'tennis','football':'soccer','cricket':'cricket','golf':'golf'}.get(activity,'')}
         a=evaluate([v],deepcopy(h),activity,{**profile,'duration_minutes':60})[0]
         v['id']='another';v['name']='Same conditions, different venue'

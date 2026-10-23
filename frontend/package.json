@@ -13,8 +13,10 @@
     "@fontsource/source-sans-3": "^5.2.0",
     "lucide-react": "^0.468.0",
     "maplibre-gl": "^6.15.0",
+    "motion": "^14.6.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-use-measure": "^2.1.7"
   },
   "devDependencies": {
     "@types/react": "^19.1.0",

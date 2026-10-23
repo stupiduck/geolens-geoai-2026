@@ -1,17 +1,61 @@
+---
+name: GeoLens field atlas
+description: Conversational outdoor decision explorer
+colors:
+  ink: "#142D38"
+  canvas: "#F2F0E7"
+  paper: "#F7F6F0"
+  primary: "#006C78"
+  vegetation: "#426E59"
+  line: "#D8DED8"
+typography:
+  body:
+    fontFamily: "Source Sans 3, Noto Sans Devanagari, sans-serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: 1.45
+  display:
+    fontFamily: "Source Sans 3, sans-serif"
+    fontSize: "57px"
+    fontWeight: 400
+    lineHeight: 0.96
+rounded:
+  sm: "3px"
+spacing:
+  sm: "8px"
+  md: "16px"
+  lg: "24px"
+components:
+  button-primary:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.paper}"
+    rounded: "{rounded.sm}"
+    padding: "13px 15px"
+---
 # GeoLens website design
 
-Approved direction: Monsoon field atlas. Mode: Operate, with cartography as the first viewport.
+Approved direction: Monsoon field atlas. Mode: Operate, with conversation and cartography sharing the workspace.
 
-## Composition
-Full real map; compact top navigation; left query and recommendation sheet; bottom hourly decision surface; evidence inspector on selection. Mobile: map then an accessible results sheet. No marketing card grid or chat-first layout.
+## Overview
+Monsoon field atlas: a calm coastal cartographic surface whose task is to compare real places and hours. The map, matrix and evidence remain synchronized.
 
-## Tokens
-Ink #142D38; canvas #F2F0E7; water #C9DEE0; vegetation #426E59; selection #006C78; caution #8A5710; avoid #A33D32. Risk communicated with text and shape as well as color.
+## Colors
+Coastal ink for decisions, mineral surfaces for controls, a restrained green suitability scale. Restriction states also use words and patterns.
 
-Source Sans 3 / Noto Sans Devanagari; tabular time numerals. 16px base; 14px minimum explanatory text. Fine rules, generous grouping and visibly interactive matrix cells.
+## Typography
+Locally bundled Source Sans 3 and Noto Sans Devanagari; serif emphasis in the opening heading. Tabular numerals carry times and measurements.
 
-## Signature interaction
+## Layout
+Desktop: persistent left conversation with fixed composer; real geographic map and synchronized hourly decision surface on the right. Mobile: Chat by default, with separate Map, Compare and Details tabs. Main recommendation stays distinct from manual map selection. Rare UI inline status follows actual backend tool events, honors reduced motion, and never reveals or simulates chain-of-thought.
+
+## Elevation & Depth
+One offset soft shadow distinguishes the query/evidence sheets from the map. No glass, neon glow or decorative gradients.
+
+## Shapes
+Fine straight rules, small-radius controls and circular numbered venue markers. Patterned unknown states differ from scored cells.
+
+## Components
 Selection synchronizes the venue marker, hour, weather summary, ranking and exact score contribution changes. No source-value animation or invented map field. Reduced motion disables camera flight.
 
-## Truth and states
+## Do's and Don'ts
 Initial map has no analysis. Only an actually captured snapshot may be offered as a labeled saved result. Loading follows real work. Outages, missing venue/access/terrain/AQ, no-suitable-option and model unavailability remain visible. OSM/OpenFreeMap attribution is persistent.

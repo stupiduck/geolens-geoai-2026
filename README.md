@@ -1,0 +1,107 @@
+# GeoLens
+
+An evidence-grounded outdoor planner: real places × upcoming hours, a self-hosted small language model, and an interactive map/time decision surface.
+
+**Local implementation. Public API/domain, GitHub identity and HF publication are pending. No production server has been accessed or modified.** Check `docs/READINESS.md` for measured results and outstanding gates; do not treat this README as a deployment or uptime claim.
+
+## Run locally (Windows)
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+.\.venv\Scripts\python.exe scripts/prepare_local_model.py --model 2b
+.\models\runtime\llama-server.exe -m models/Qwen3.5-2B-Q4_K_M.gguf --host 127.0.0.1 --port 8081 -t 2 -tb 2 -c 2048 -np 1 -b 128 -ub 32 --jinja --reasoning off --no-webui
+```
+
+In separate terminals:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn geolens.app:app --app-dir backend --host 127.0.0.1 --port 8000
+npm.cmd ci --prefix frontend
+npm.cmd run dev --prefix frontend
+```
+
+Website: http://localhost:5173. JSON API/docs: http://127.0.0.1:8000/docs. Health/readiness: `/healthz` and `/readyz`. `.env.example` lists configurable model, cache and URL settings. Nothing needs a browser session or hosted model API key.
+
+Linux uses the same Python/Node commands with Unix virtualenv paths and the downloaded Linux llama-server binary. Model release/quantization provenance and checksum are recorded in `models/local-manifest.json` after verified download. Do not assume a completed filename means the file is valid; the downloader checks length and SHA-256.
+
+## OSM-extract fallback
+
+Public Overpass was unreliable from this development network. A valid imported extract is preferred within its declared coverage; elsewhere the application tries bounded public queries and opens a five-minute circuit after outages. The attributed SQLite/RTree fallback stores genuine OSM geography, never prewritten recommendations. Query-specific numerical computation and live/cache-TTL weather still run.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/download_osm.py --region western-zone
+.\.venv\Scripts\python.exe scripts/import_osm.py data/extracts/western-zone.osm.pbf --source-url https://download.geofabrik.de/asia/india/western-zone-latest.osm.pbf --bounds 72.7,18.4,74.1,19.6
+```
+
+The Western Zone rectangle covers Mumbai–Pune–Lonavala. A second Southern Zone database covers Bengaluru (77.3,12.7,77.9,13.3), configured via GEOLENS_OSM_EXTRACT_EXTRA_DATABASES; additional database paths can be separated by semicolons. It is **not India-wide fallback coverage**. Other resolvable Indian areas use the same live pipeline; when Overpass fails and their geography is not imported, return unavailable rather than inventing venues. Import another appropriate Geofabrik extract with a conservatively covered rectangle for broader fallback coverage. Only point/way/area features are stored, with source, date, licence and query bounds. An import may take several minutes and uses a disk-backed node cache; do not query its in-progress database.
+
+Attribution: **© OpenStreetMap contributors**, ODbL; regional download by Geofabrik. https://www.openstreetmap.org/copyright and https://download.geofabrik.de/asia/india.html. Do not redistribute extracted databases as application code under the code licence; retain the applicable database licence and source metadata.
+
+For Bengaluru fallback, download the Southern Zone and import it separately:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/download_osm.py --region southern-zone
+.\.venv\Scripts\python.exe scripts/import_osm.py data/extracts/southern-zone.osm.pbf --source-url https://download.geofabrik.de/asia/india/southern-zone-latest.osm.pbf --bounds 77.3,12.7,77.9,13.3 --output data/osm-southern.sqlite
+```
+
+## API
+
+```powershell
+$body = @{question='Where should I run tomorrow morning near Powai, Mumbai?';include=@('evidence','hourly','geojson')} | ConvertTo-Json
+Invoke-RestMethod http://127.0.0.1:8000/v1/recommend -Method Post -ContentType application/json -Body $body
+```
+
+`POST /ask` is the synchronous compatibility route. `POST /v1/analyses` plus polling/SSE provides actual operation progress for the UI; stored snapshots expire and are bounded. `/compare` returns exact contribution differences; `/scenario` recomputes sensitivity using the same source snapshot. No model call occurs on every slider tick.
+
+Responses include status, normalized intent, assumptions, venues, recommendations/alternatives, restrictions, source metadata, model identity and timings. Clarification/no-suitable-option/insufficient-data are legitimate domain results. Overload is bounded; unavailable inference returns 503, deadline 504 and invalid input 422. No canned answer substitutes for failed inference.
+
+Supported activities: running, cycling, golf, cricket, football, tennis, hiking/nature walk, picnic, outdoor gathering, photography. Commute-specific route planning currently returns explicit clarification/unavailability; it does not invent a route. Exact opening-hours parsing, booking, full-trip route verification and country-polygon validation remain limitations.
+
+## Model and scientific boundaries
+
+Qwen3.5-2B original revision `15852e8c16360a2fea060d615a32b45270f8a8fc`, full released count 2,274,069,824 including vision/MTP; Apache-2.0. Text-only Q4_K_M via llama.cpp; one loaded model. No fine-tuning. A compact schema interprets English/Hindi constraints; a second real SLM call compares options using typed predicates verified by Python. Explicit sensitivity mentions are preserved even when the small model omits them.
+
+Weather: Open-Meteo model forecasts, not observations. AQ: CAMS Global regional modeled US AQI (~45 km; native 3-hourly), not Indian CPCB AQI or a park sensor. Road/industry/green features are mapped proxies, not live traffic, concentrations or tree-canopy measurements. Terrain, if available, describes a sampled real mapped segment, not a fabricated complete hiking/cycling route. Scores/ranges are heuristic suitability/missing-data bounds, not calibrated confidence or medical clearance.
+
+No claim is made that an outdoor activity is safe merely because a forecast/score is favorable. Unknown access, lighting, weather fields and terrain remain explicit. Whole activity windows are checked; future storms cannot hide behind a favorable start hour.
+
+## Sources and usage
+
+- Nominatim: submit-only geocoding, <=1 request/s, identifying User-Agent, cache and OSM attribution. https://operations.osmfoundation.org/policies/nominatim/
+- Overpass/Private.coffee: bounded public queries and respectful concurrency; ODbL. https://dev.overpass-api.de/overpass-doc/en/preface/commons.html and https://overpass.private.coffee/
+- Open-Meteo weather/AQ: non-commercial public hackathon prototype only, CC BY 4.0 data, credit Open-Meteo and Copernicus CAMS/providers. https://open-meteo.com/en/terms and https://open-meteo.com/en/docs/air-quality-api
+- OpenTopoData SRTM30m: historical elevation; credit NASA/USGS; 100 points/request, 1 request/s, 1,000 requests/day. https://www.opentopodata.org/
+- Satellite: EOX Sentinel-2 cloudless 2024 mosaic, modified Copernicus Sentinel data, CC BY-NC-SA 4.0. Historical context only; not live imagery or an input to scores. https://maps.eox.at/
+- OpenFreeMap/OpenMapTiles/OSM: public vector basemap; persistent attribution. https://openfreemap.org/quick_start/
+- AQ advice: EPA/AirNow US-AQI guidance; not a conversion to Indian AQI. https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf
+
+Run without subscriptions, ads, commercial promotion or lead capture under the selected free weather service terms. Do not silently monetize this service without re-evaluating source terms. No paid/private inference/data APIs are used.
+
+## Verification and mandatory artifacts
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe scripts/probe_sources.py
+.\.venv\Scripts\python.exe scripts/benchmark_model.py
+npm.cmd run build --prefix frontend
+npm.cmd audit --prefix frontend
+```
+
+HF release files/card/upload and clean-load scripts are under `hf-release/` and `scripts/publish_model.py`, `scripts/verify_hf_load.py`. They require the chosen public identity/authentication later; no credentials are printed. A staged card alone does not satisfy the loadable-public-model deliverable. Six-slide and demo-video sources are under `submission/`; final captures/results must be genuine.
+
+Docker Compose configuration is under `deploy/`. All ports bind loopback by default and the model stays private. Resource limits are provisional until measured in the eventual Linux container environment. Do not run any command against the existing production server without explicit approval. No prune, volume deletion, firewall change or shared-proxy modification is part of this setup.
+
+**AI coding disclosure:** OpenAI Codex assisted research, coding, tests and design implementation. No sub-agents were used. Impeccable was used for the product website; visual review was performed in the same session per user instruction. Proprietary coding AI is not called by the running application.
+
+## Conversational interface and API
+
+Activity and constraints are inferred from the message; Preferences are optional overrides. Desktop keeps chat, map and comparison visible. Mobile provides Chat, Map, Compare and Details views. Map selection inspects a candidate without rewriting the assistant recommendation.
+
+Each `/v1/analyses` or `/v1/recommend` reply returns an opaque `conversation_id`. Send that ID with the next original `question` to retain structured place, time, activity and constraints. Relative time shifts anchor to the prior recommendation. Location disambiguation submits `location: {id, name, latitude, longitude}` separately and preserves the original question and script. `GET /v1/conversations/{id}` restores recent turns and the current analysis. Memory is process-local, bounded to 32 conversations and 20 turns, and expires after an idle hour; restarting the API clears it. Use a single API worker. Only the opaque ID is stored in browser localStorage. Treat it as private; production transport must use HTTPS.
+
+Actual pipeline events include status and measured stage duration. The frontend uses a source-adapted [Rare UI](https://rareui.com) AI Status component, copyright 2026 Swami Malode, pinned to commit `8944172746e8e836aea2061790ee16b0577dd655`. Its MIT + Commons Clause + Attribution terms are retained in `frontend/src/vendor/RareUI-LICENSE.txt`; this exception is not covered by the application code licence. No simulated web searches or hidden reasoning traces are displayed.
+
+An existing OpenAI-compatible Qwen endpoint can be configured through `GEOLENS_MODEL_URL`. Optional `GEOLENS_MODEL_API_KEY` or Modal proxy key/secret settings are server-only. Never expose credentials in Vite variables. The local verified default remains the single resident llama.cpp model. No new hosted deployment is created by this configuration.
+
+Rule version 2026-10-23.2 uses conservative regional US-AQI planning cutoffs: intense activities avoid at 151, or 101 for sensitive profiles; other activities avoid at 201, or 151 for sensitive profiles. These are planner policies informed by [AirNow guidance](https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf), not personal medical clearance. Rain probability affects suitability and explicit caution, while intense rain, thunder and wind restrictions remain separate.

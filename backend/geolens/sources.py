@@ -184,7 +184,7 @@ class Sources:
             normalized_name=''.join(c for c in tags.get('name','').casefold() if c.isalnum()).rstrip('s')
             if normalized_name and any(v.get('_name_key')==normalized_name and distance_km(center.y,center.x,v['lat'],v['lon'])<.15 for v in candidates):
                 continue
-            candidates.append({"id": f"{e['type']}/{e['id']}", "name": tags.get("name") or tags.get("name:en") or f"Mapped {activity.replace('_',' ')} location", "lat": center.y, "lon": center.x,
+            candidates.append({"id": f"{e['type']}/{e['id']}", "name": tags.get("name") or tags.get("name:en") or f"Unnamed {activity.replace('_',' ')} location · OSM {e['id']}", "lat": center.y, "lon": center.x,
                 "distance_km": round(distance,3), "tags": tags, "features": {}, "geometry": e.get("geojson"),'_name_key':normalized_name})
         candidates.sort(key=lambda v: (v["tags"].get("access") in {"private","customers","members"}, v["distance_km"]))
         return candidates[:8], meta

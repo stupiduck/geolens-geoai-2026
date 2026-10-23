@@ -15,9 +15,10 @@ def explicit_location(question):
         value=match.group(1).strip(' ,.')
         if value and not re.match(r'^(?:the\s+)?(?:morning|evening|afternoon|rain|heat)\b',value,re.I):
             return value
-    match=re.search(r'([\u0900-\u097f\w ,]+?)\s+(?:के पास|के आसपास|में)\b',question)
+    match=re.search(r'([\u0900-\u097f\w ,]+?)\s+(?:के पास|के आसपास|में)(?=\s|[?!।]|$)',question)
     if match:
         value=re.sub(r'^(?:कल|आज|इस|सुबह|शाम|दोपहर|सप्ताहांत|\s)+','',match.group(1)).strip(' ,')
+        if value in {'हिंदी','हिन्दी','अंग्रेजी','अंग्रेज़ी','बारिश','धूप','गर्मी','सर्दी'}:return None
         return value or None
     return None
 
@@ -42,8 +43,8 @@ def validate_claims(claims, options):
         elif predicate == "regional_aq_shared":
             x, y = a["conditions"].get("us_aqi"), b["conditions"].get("us_aqi")
             truth = x is not None and x == y
-        elif predicate in {'lower_thermal_penalty','lower_road_proxy','shorter_trip'}:
-            factor={'lower_thermal_penalty':'thermal','lower_road_proxy':'road_industry','shorter_trip':'travel'}[predicate]
+        elif predicate in {'lower_thermal_penalty','lower_road_proxy','shorter_trip','more_mapped_green'}:
+            factor={'lower_thermal_penalty':'thermal','lower_road_proxy':'road_industry','shorter_trip':'travel','more_mapped_green':'vegetation'}[predicate]
             x=next((c['penalty'] for c in a.get('contributions',[]) if c['factor']==factor),None)
             y=next((c['penalty'] for c in b.get('contributions',[]) if c['factor']==factor),None)
             truth=x is not None and y is not None and x<y
@@ -58,22 +59,28 @@ def validate_claims(claims, options):
 class LocalModel:
     def __init__(self):
         self.lock = asyncio.Lock()
-        self.client = httpx.AsyncClient(timeout=40)
+        headers={}
+        if settings.model_api_key.get_secret_value():headers['Authorization']='Bearer '+settings.model_api_key.get_secret_value()
+        if settings.model_proxy_key.get_secret_value():headers['Modal-Key']=settings.model_proxy_key.get_secret_value()
+        if settings.model_proxy_secret.get_secret_value():headers['Modal-Secret']=settings.model_proxy_secret.get_secret_value()
+        self.client = httpx.AsyncClient(timeout=40,headers=headers)
+
+    def endpoint(self,path):
+        base=settings.model_url.rstrip('/')
+        return base+path.removeprefix('/v1') if base.endswith('/v1') else base+path
 
     async def ready(self):
         try:
-            if (await self.client.get(settings.model_url + "/health", timeout=2)).status_code != 200:
-                return False
-            props=await self.client.get(settings.model_url+'/props',timeout=2)
             expected=settings.model_id.rsplit('/',1)[-1].casefold()
-            return props.status_code==200 and expected in props.json().get('model_path','').casefold()
-        except httpx.HTTPError:
+            models=await self.client.get(self.endpoint('/v1/models'),timeout=3)
+            return models.status_code==200 and any(expected in str(m.get('id','')).casefold() for m in models.json().get('data',[]))
+        except (httpx.HTTPError,ValueError,KeyError):
             return False
 
     async def generate(self, system, user, schema, tokens=200):
         begin = time.perf_counter()
         async with self.lock:
-            result = await self.client.post(settings.model_url + "/v1/chat/completions", json={
+            result = await self.client.post(self.endpoint('/v1/chat/completions'), json={
                 "model": settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
                 "temperature": 0, "max_tokens": tokens, "stream": False,
                 "chat_template_kwargs": {"enable_thinking": False},
@@ -81,6 +88,8 @@ class LocalModel:
             })
             result.raise_for_status()
             payload = result.json()
+            if payload["choices"][0].get("finish_reason")=="length":
+                raise ValueError("The model response reached its output limit. Please retry the message.")
             content = payload["choices"][0]["message"]["content"]
             return json.loads(content), {"elapsed_ms": round((time.perf_counter()-begin)*1000), "usage": payload.get("usage", {})}
 
@@ -109,13 +118,49 @@ class LocalModel:
         result['language']='hi' if re.search('[\u0900-\u097f]',question) else 'en'
         return result,timing
 
+    async def followup(self,question,context):
+        from .conversation import FLAGS
+        # A patch may only change a health/family flag mentioned in this message.
+        cues={'pollution_sensitive':r'asthma|sensitive|pollution|दमा|अस्थमा|संवेदनशील|प्रदूषण',
+              'child_present':r'child|kid|baby|बच्च', 'older_adult':r'older|elder|senior|parent|father|mother|बुज़ुर्ग|बुजुर्ग|माता|पिता',
+              'pregnancy':r'pregnan|गर्भ', 'avoid_steep_terrain':r'steep|hill|slope|flat|ढलान|पहाड़|समतल',
+              'commute':r'commut|office|work|school|college|दफ्तर|ऑफिस|आवागमन'}
+        permitted_flags=[key for key,pattern in cues.items() if re.search(pattern,question,re.I)]
+        props={
+            'activity':{'type':['string','null'],'enum':list(ACTIVITIES)+['unknown',None]},
+            'location':{'type':['string','null']},'time_expression':{'type':['string','null']},
+            'time_shift_hours':{'type':['integer','null'],'minimum':-48,'maximum':168},
+            'radius_km':{'type':['number','null']},'duration_minutes':{'type':['integer','null']},
+            'set_flags':{'type':'array','maxItems':len(permitted_flags),'items':{'type':'string','enum':permitted_flags or list(FLAGS)}},
+            'clear_flags':{'type':'array','maxItems':len(permitted_flags),'items':{'type':'string','enum':permitted_flags or list(FLAGS)}},
+            'prefer_greener':{'type':['boolean','null']}}
+        schema={'type':'object','additionalProperties':False,'properties':props,'required':list(props)}
+        patch,timing=await self.generate(
+            'Interpret the latest outdoor-planning MESSAGE as changes to the supplied CONTEXT. Return a JSON PATCH, not an answer. Unchanged or unstated fields MUST be null and flag arrays empty. Never invent a new place. Preserve full location phrases in their original script. Relative later/earlier refers to the previous recommended_time: put signed integer hours in time_shift_hours. Explicit tomorrow/evening/date goes in time_expression instead. Greener or more trees means prefer_greener=true. Only set/clear health or family flags if the MESSAGE explicitly states a change. Office travel means commute. Activity changes must be explicit; a bare place reply changes only location. Example MESSAGE Two hours later returns {"activity":null,"location":null,"time_expression":null,"time_shift_hours":2,"radius_km":null,"duration_minutes":null,"set_flags":[],"clear_flags":[],"prefer_greener":null}. Somewhere greener changes only prefer_greener=true. Do not copy existing values or flags from CONTEXT. Use compact JSON.',
+            json.dumps({'message':question,'context':context},ensure_ascii=False,separators=(',',':')),schema,350)
+        for action in ('set_flags','clear_flags'):
+            patch[action]=list(dict.fromkeys(k for k in patch[action] if re.search(cues[k],question,re.I)))
+        if not re.search(r'green|tree|wood|forest|हरियाली|हरा|पेड़|जंगल',question,re.I):patch['prefer_greener']=None
+        for key in ('activity','time_expression'):
+            if patch.get(key)==context.get(key):patch[key]=None
+        if isinstance(context.get('area'),dict) and patch.get('location')==context['area'].get('name'):patch['location']=None
+        for key in ('radius_km','duration_minutes'):
+            if patch.get(key)==context.get('constraints',{}).get(key):patch[key]=None
+        # Display language is inherited separately from location resolution.
+        patch['language']='hi' if re.search('[\u0900-\u097f]',question) else context.get('language','en')
+        if re.search(r'in English|अंग्रेजी|अंग्रेज़ी',question,re.I):patch['language']='en'
+        if re.search(r'in Hindi|हिंदी में',question,re.I):patch['language']='hi'
+        if explicit_location(question):patch['location']=explicit_location(question)
+        if explicit_commute(question) and 'commute' not in patch['set_flags']:patch['set_flags'].append('commute')
+        return patch,timing
+
     async def reason(self, options, constraints):
         aliases={chr(65+i):o for i,o in enumerate(options)}
         # Enumerate verifiable relationships BEFORE the model selects its trade-offs.
         # This constrains facts while retaining model interpretation, option selection
         # and evidence prioritization; it does not substitute a canned answer.
         claims={}
-        predicates=['lower_thermal_penalty','lower_road_proxy','shorter_trip','cooler_than','less_rain_than','cleaner_regional_air','regional_aq_shared','higher_score']
+        predicates=['more_mapped_green','lower_thermal_penalty','lower_road_proxy','shorter_trip','cooler_than','less_rain_than','cleaner_regional_air','regional_aq_shared','higher_score']
         for subject,a in aliases.items():
             for obj,b in aliases.items():
                 if subject==obj:
