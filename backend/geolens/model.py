@@ -90,8 +90,8 @@ class LocalModel:
             while True:
                 result = await self.client.post(self.endpoint('/v1/chat/completions'), json={
                     "model": settings.model_served_id or settings.model_id, "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-                    "temperature": 0, "max_tokens": tokens, "stream": False,
-                    "chat_template_kwargs": {"enable_thinking": False},
+                    "temperature": 0, "max_tokens": tokens + 1024, "stream": False,
+                    "chat_template_kwargs": {"enable_thinking": True},
                     "response_format": {"type": "json_schema", "json_schema": {"name": "geolens", "strict": True, "schema": schema}},
                 })
                 if result.status_code not in {502,503,504} or time.monotonic()>=startup_deadline:break

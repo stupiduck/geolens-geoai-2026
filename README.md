@@ -14,7 +14,7 @@ The public core is deployed. Latest optional web-search and contrast changes are
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
 .\.venv\Scripts\python.exe scripts/prepare_local_model.py --model 2b
-.\models\runtime\llama-server.exe -m models/Qwen3.5-2B-Q4_K_M.gguf --host 127.0.0.1 --port 8081 -t 2 -tb 2 -c 2048 -np 1 -b 128 -ub 32 --jinja --reasoning off --no-webui
+.\models\runtime\llama-server.exe -m models/Qwen3.5-2B-Q4_K_M.gguf --host 127.0.0.1 --port 8081 -t 2 -tb 2 -c 4096 -np 1 -b 128 -ub 32 --jinja --reasoning on --no-webui
 ```
 
 In separate terminals:
