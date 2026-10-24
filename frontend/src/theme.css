@@ -19,7 +19,7 @@
 [data-theme=dark] .empty-matrix>div:first-child{background:var(--paper);color:var(--ink)}
 [data-theme=dark] .empty-matrix svg,[data-theme=dark] .empty-matrix span,[data-theme=dark] .counterfactual>strong,[data-theme=dark] .counterfactual>strong span,[data-theme=dark] .counterfactual .eligibility-change{color:var(--muted)}
 [data-theme=dark] .score-cell{color:#102116;background:color-mix(in srgb,#a6c49f calc(var(--strength) * 70%),#849a7d)}
-[data-theme=dark] .maplibregl-ctrl-attrib{background:#19261f!important;color:#dce6d7!important}
-[data-theme=dark] .maplibregl-ctrl-attrib a{color:#dce6d7!important}
 [data-theme=dark] .maplibregl-ctrl-attrib-button{background-color:#dce6d7}
 [data-theme=dark] .matrix thead th:first-child span{color:var(--muted)}
+:root[data-theme=dark] .maplibregl-ctrl-attrib{background:#19261f!important;color:#dce6d7!important}
+:root[data-theme=dark] .maplibregl-ctrl-attrib a{color:#dce6d7!important}
